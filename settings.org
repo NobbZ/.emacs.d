@@ -1,0 +1,220 @@
+* Foreword
+
+This file is massively inspired/shamelessely stolen from the one shown
+at [[https://ogbe.net/emacsconfig.html]]
+
+* Helpers
+
+Small little helpers which make it easier to live-reload the config:
+
+#+BEGIN_SRC emacs-lisp
+  (defun reload-settings ()
+    (interactive)
+    (org-babel-load-file "~/.emacs.d/settings.org"))
+  (defun settings ()
+    (interactive)
+    (find-file "~/.emacs.d/settings.org"))
+#+END_SRC
+
+* Packages
+
+#+BEGIN_SRC emacs-lisp
+  (setq package-list '(framemove htmlize))
+
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package)))
+#+END_SRC
+
+* TODO Security
+* Appearance, UI Elements, and the Emacs server
+
+First start a server and then set some important appearance
+settings. Note that some of the settings are in [[file:init.el][=init.el=]].
+
+** The server
+
+Start the server if not already running.
+
+#+BEGIN_SRC emacs-lisp
+  (load "server")
+  (unless (server-running-p) (server-start))
+#+END_SRC
+
+When connected to a server using =emacsclient=, we want to kill the
+client using ~C-x k~, the way it seems natural.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'server-switch-hook
+            (lambda ()
+              (when (current-local-map)
+                (use-local-map (copy-keymap (current-local-map))))
+              (local-set-key (kbd "C-x k") 'server-edit)))
+#+END_SRC
+
+** Appearance
+
+*** Theme & Faces
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'wombat) ;; A nice dark theme
+  (set-face-attribute 'default nil :height 94) ;; 9.4pt font height
+  (set-face-attribute 'default nil :family "Consolas")
+  (set-face-attribute 'fringe  nil :background "#2d2d2d")
+  (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'semibold)
+  ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
+#+END_SRC
+
+*** UI Elements
+
+Get rid of that ugly disturbing stuff no one needs…
+
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (when (display-graphic-p)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1))
+#+END_SRC
+
+*** Welcome Screen
+
+We also want to get rid of the splash screen and start into home
+directory.
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t)
+  (setq inhibit-splash-screen t)
+  (setq initial-scratch-message nil)
+  (setq initial-buffer-choice "~/")
+#+END_SRC
+
+*** TODO Window Geometry
+
+*** TODO Scrolling
+
+I need to find out how to let emacs behave as with =spacemacs=
+=smoothscrolling= setting.
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* Autosave and Backup
+
+Autosaves directly beneath the edited files do clutter up the
+sourcetree. Instead let's throw them inside =~/tmp/=.
+
+#+BEGIN_SRC emacs-lisp
+  (defvar backup-dir   (expand-file-name "~/tmp/emacs_backup/"))
+  (defvar autosave-dir (expand-file-name "~/tmp/emacs_autosave/"))
+
+  (setq backup-directory-alist (list (cons ".*" backup-dir)))
+  (setq auto-save-list-file-prefix autosave-dir)
+  (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+  (setq tramp-backup-directory-alist backup-directory-alist)
+  (setq tramp-auto-save-directory autosave-dir)
+#+END_SRC
+
+* Window Movement
+
+Use Shift-<Arrow> to navigate through windows.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'framemove)
+  (windmove-default-keybindings)
+  (setq framemove-hook-into-windmove t)
+#+END_SRC
+
+* Debugging
+
+Setup some keys to make it easier to use GUD.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f7>") 'gud-cont)
+  (global-set-key (kbd "<f6>") 'gud-step)
+  (global-set-key (kbd "<f5>") 'gud-next)
+  (global-set-key (kbd "<f8>") 'gud-finish)
+#+END_SRC
+
+* Traiiling Whitespace
+
+We want to see trailing whitespace, since it is the devil.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'whitespace)
+  (setq-default show-trailing-whitespace t)
+#+END_SRC
+
+** But do not display in some modes
+
+#+BEGIN_SRC emacs-lisp
+  (defun no-trailing-whitespace ()
+    (setq show-trailing-whitespace nil))
+#+END_SRC
+
+Add a line for each mode:
+
+#+BEGIN_EXAMPLE
+(add-hook 'buffer-mode-hook 'no-trailing-whitespace)
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'minibuffer-setup-hook 'no-trailing-whitespace)
+#+END_SRC
+* TODO Dired
+
+** General Settings
+
+The dirst two lines stop dired from asking me if I really want to
+recursively delete/copy directories. I never answer "no" to that
+question.
+
+The other lines enable "Do What I Mean" mode for dired, using the
+other buffers location as target when copying in split-screen mode.
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq dired-dwim-target t)
+  (setq dired-listing-switches "-alh")
+#+END_SRC
+
+* Org-Mode
+
+[[http://orgmode.org/][org-mode]] might be THE killer app for emacs.
+
+** General settings
+
+Some general settings for org.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org)
+  (setq-default
+   org-return-follows-link t
+   org-image-actual-width '(400)
+   org-highlight-latex-and-related '(latex script entities))
+#+END_SRC
+
+** Syntax-Highlighting in sourceblocks
+
+This is a very important feature in an org-document. Also adds native
+~<tab>~ behaviour in those blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq
+   org-src-fontify-natively t
+   org-src-tab-acts-natively t)
+#+END_SRC
+
+** HTML Export
+
+There shall be a custom stylesheet for HTML export.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ox-html)
+  (setq org-html-htmlize-output-type 'css)
+#+END_SRC
+
