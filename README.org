@@ -5,3 +5,10 @@
 This is my work in progress [[http://http://www.gnu.org/software/emacs/][=emacs=]] -config.
 
 You can read [[file:settings.org][=settings.org=]] for further details.
+
+If you want to try it out on your own, be warned, that it might be
+slightly misconfigured and also be tied to my machine(s).
+
+#+BEGIN_SRC sh
+  git clone --origin upstream https://github.com/NobbZ/emacs.d.git .emacs.d
+#+END_SRC
