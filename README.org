@@ -10,5 +10,7 @@ If you want to try it out on your own, be warned, that it might be
 slightly misconfigured and also be tied to my machine(s).
 
 #+BEGIN_SRC sh
-  git clone --origin upstream https://github.com/NobbZ/emacs.d.git .emacs.d
+  mv ~/emacs.d ~/.emacs.d.bak # back up old emacs-stuff
+  git clone --origin upstream https://github.com/NobbZ/emacs.d.git ~/.emacs.d
 #+END_SRC
+
