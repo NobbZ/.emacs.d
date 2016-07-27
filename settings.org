@@ -213,7 +213,7 @@ We want to allow =latex= and =elisp= for now.
   (require 'ob-latex)
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-list . t)
+   '((emacs-lisp . t)
      (latex . t)))
 #+END_SRC
 
