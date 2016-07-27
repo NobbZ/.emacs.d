@@ -66,6 +66,8 @@ client using ~C-x k~, the way it seems natural.
   (set-face-attribute 'fringe  nil :background "#2d2d2d")
   (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'semibold)
   ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
+
+  (global-hl-line-mode t)
 #+END_SRC
 
 *** UI Elements
