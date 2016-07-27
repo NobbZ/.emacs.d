@@ -196,6 +196,7 @@ Some general settings for org.
    org-return-follows-link t
    org-image-actual-width '(400)
    org-highlight-latex-and-related '(latex script entities))
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 
 ** Syntax-Highlighting in sourceblocks
