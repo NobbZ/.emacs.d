@@ -216,6 +216,6 @@ There shall be a custom stylesheet for HTML export.
 
 #+BEGIN_SRC emacs-lisp
   (require 'ox-html)
-  (setq org-html-htmlize-output-type 'css)
+  (setq org-html-htmlize-output-type 'inline-css)
 #+END_SRC
 
