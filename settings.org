@@ -1,3 +1,7 @@
+#+TITLE: NobbZ-Emacs Configuration
+#+AUTHOR: Norbert Melzer
+#+EMAIL: timmelzer@gmail.com
+
 * Foreword
 
 This file is massively inspired/shamelessely stolen from the one shown
