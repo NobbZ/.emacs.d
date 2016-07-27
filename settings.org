@@ -237,3 +237,13 @@ There shall be a custom stylesheet for HTML export.
   (setq org-html-htmlize-output-type 'inline-css)
 #+END_SRC
 
+** PDF-Export
+
+Use minted as a highlighter.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+#+END_SRC
+
