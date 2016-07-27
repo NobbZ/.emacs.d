@@ -1,0 +1,7 @@
+#+TITLE: README
+#+AUTHOR: Norbert Melzer
+#+EMAIL: timmelzer@gmail.com
+
+This is my work in progress [[http://http://www.gnu.org/software/emacs/][=emacs=]] -config.
+
+You can read [[file:settings.org][=settings.org=]] for further details.
