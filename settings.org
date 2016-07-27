@@ -205,6 +205,18 @@ Some general settings for org.
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 
+** Allow execution of src-blocks
+
+We want to allow =latex= and =elisp= for now.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ob-latex)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-list . t)
+     (latex . t)))
+#+END_SRC
+
 ** Syntax-Highlighting in sourceblocks
 
 This is a very important feature in an org-document. Also adds native
