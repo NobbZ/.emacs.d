@@ -19,6 +19,7 @@
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/vendor/org/lisp")
 
 ;; Moved all the custom.el stuff into its own file called
 ;; =~/.emacs.d/customize.el=
@@ -30,6 +31,7 @@
     (replace-regexp-in-string "[ \t\n]*\\'" ""
       (shell-command-to-string "hostname"))))
 
+(require 'org)
 (defface org-block-begin-line
   '((t (:foreground "#99968b" :background "#303030")))
   "Face used for line delimiting the begin of source blocks.")
