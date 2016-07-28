@@ -7,6 +7,11 @@
 	("melpa" . "https://melpa.org/packages/")
 	("org" . "http://orgmode.org/elpa/")))
 (package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
@@ -17,9 +22,9 @@
 (load custom-file)
 
 (setq hostname
-      (replace-regexp-in-string "\\`[ \t\n]*" ""
-				(replace-regexp-in-string "[ \t\n]*\\'" ""
-							  (shell-command-to-string "hostname"))))
+  (replace-regexp-in-string "\\`[ \t\n]*" ""
+    (replace-regexp-in-string "[ \t\n]*\\'" ""
+      (shell-command-to-string "hostname"))))
 
 (defface org-block-begin-line
   '((t (:foreground "#99968b" :background "#303030")))

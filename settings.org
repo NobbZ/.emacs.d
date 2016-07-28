@@ -22,11 +22,11 @@ Small little helpers which make it easier to live-reload the config:
 
 * Packages
 
-#+BEGIN_SRC emacs-lisp
-  (setq package-list '(framemove htmlize))
+#+BEGIN_SRC emacs-lisp :tangle no
+  (setq package-list '(use-package framemove htmlize))
 
-  (unless package-archive-contents
-    (package-refresh-contents))
+;;  (unless package-archive-contents
+;;    (package-refresh-contents))
 
   (dolist (package package-list)
     (unless (package-installed-p package)
@@ -191,6 +191,15 @@ other buffers location as target when copying in split-screen mode.
 * Org-Mode
 
 [[http://orgmode.org/][org-mode]] might be THE killer app for emacs.
+
+** Installation
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :ensure t
+    :defer t
+    :pin org)
+#+END_SRC
 
 ** General settings
 
