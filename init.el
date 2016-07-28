@@ -13,8 +13,9 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
 (eval-when-compile
-  (require 'use-package nil t))
+  (require 'use-package))
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
