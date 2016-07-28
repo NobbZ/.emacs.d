@@ -266,3 +266,11 @@ Use minted as a highlighter.
   (setq org-latex-listings 'minted)
 #+END_SRC
 
+Also we want to use =latexmk= as the build-manager and =lualatex= as
+the engine.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-pdf-process
+        '("latexmk -lualatex -f -shell-escape %f"))
+#+END_SRC
+
