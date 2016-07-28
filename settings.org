@@ -7,6 +7,11 @@
 This file is massively inspired/shamelessely stolen from the one shown
 at [[https://ogbe.net/emacsconfig.html]]
 
+Before this file is actually loaded the following =init.el= is
+executed.
+
+#+INCLUDE: "init.el" src emacs-lisp
+
 * Helpers
 
 Small little helpers which make it easier to live-reload the config:
