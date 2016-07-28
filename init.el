@@ -6,12 +6,15 @@
       '(("gnu" . "https://elpa.gnu.org/packages/")
 	("melpa" . "https://melpa.org/packages/")
 	("org" . "http://orgmode.org/elpa/")))
+(when (boundp 'package-pinned-packages)
+  (setq package-pinned-packages
+	'((org . "org"))))
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-when-compile
-  (require 'use-package))
+  (require 'use-package nil t))
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")

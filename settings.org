@@ -33,6 +33,11 @@ Small little helpers which make it easier to live-reload the config:
       (package-install package)))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(use-package framemove)
+
+#+END_SRC
+
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
