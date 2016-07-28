@@ -3,9 +3,9 @@
 
 (require 'package)
 (setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
+      '(("gnu"   . "https://elpa.gnu.org/packages/")
 	("melpa" . "https://melpa.org/packages/")
-	("org" . "http://orgmode.org/elpa/")))
+	("org"   . "http://orgmode.org/elpa/")))
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages
 	'((org . "org"))))
