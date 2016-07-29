@@ -75,7 +75,7 @@ client using ~C-x k~, the way it seems natural.
 
 #+BEGIN_SRC emacs-lisp
   (load-theme 'wheatgrass) ;; A nice dark theme
-  (set-face-attribute 'default nil :height 94) ;; 9.4pt font height
+  (set-face-attribute 'default nil :height 100) ;; 10pt font height
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'fringe  nil :background "#2d2d2d")
   (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'semibold)
