@@ -226,15 +226,47 @@ Some general settings for org.
 
 ** Allow execution of src-blocks
 
-We want to allow =latex= and =elisp= for now.
+First we need an empty list
+
+#+BEGIN_SRC emacs-lisp
+  (setq nobbz-babel-languages-alist '())
+#+END_SRC
+
+*** \LaTeX
 
 #+BEGIN_SRC emacs-lisp
   (require 'ob-latex)
+  (add-to-list 'nobbz-babel-languages-alist '(latex . t))
+#+END_SRC
+
+*** Emacs-Lisp
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'nobbz-babel-languages-alist '(emacs-lisp . t))
+#+END_SRC
+
+*** Ditaa
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'nobbz-babel-languages-alist '(ditaa . t))
+#+END_SRC
+
+*** Applying the stuff
+
+#+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . t)
-     (latex . t)))
+   nobbz-babel-languages-alist)
 #+END_SRC
+
+#+BEGIN_SRC ditaa :file hello-world.png
+  +--------------+
+  | Hello World! |
+  +--------------+
+#+END_SRC
+
+#+RESULTS:
+[[file:images/hello-world.png]]
 
 ** Syntax-Highlighting in sourceblocks
 
