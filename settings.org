@@ -332,3 +332,11 @@ the engine.
         '("latexmk -lualatex -f -shell-escape %f"))
 #+END_SRC
 
+** Agenda
+
+We want to have this file itself on our agenda.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-agenda-files (concat dropbox-base-path "/Dokumente/org/TODO.org"))
+  (add-to-list 'org-agenda-files "~/.emacs.d/settings.org")
+#+END_SRC
