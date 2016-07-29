@@ -118,7 +118,9 @@ I need to find out how to let emacs behave as with =spacemacs=
 
 #+END_SRC
 
-* Autosave and Backup
+* Pathes
+
+** Autosave and Backup
 
 Autosaves directly beneath the edited files do clutter up the
 sourcetree. Instead let's throw them inside =~/tmp/=.
