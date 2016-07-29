@@ -136,6 +136,30 @@ sourcetree. Instead let's throw them inside =~/tmp/=.
   (setq tramp-auto-save-directory autosave-dir)
 #+END_SRC
 
+** TODO Dropbox
+
+We need to know the basepath of dropbox.
+
+The current function to read the path from =dropbox=' config is very
+ugly and needs some care to make it more beautiful.
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+  <<find-dropbox-folder-elisp>>
+  (defvar dropbox-base-path (find-dropbox-folder))
+#+END_SRC
+
+#+NAME: find-dropbox-folder-elisp
+#+BEGIN_SRC emacs-lisp :tangle no :exports none
+  (require 'json)
+
+  (defun find-dropbox-folder ()
+    (interactive)
+    (let ((json-path (if (eq system-type 'gnu/linux)
+                         (expand-file-name "~/.dropbox/info.json")
+                       (expand-file-name "%APPDATA%\\Dropbox\\info.json"))))
+      (cdr (assoc 'path (car (json-read-file json-path))))))
+#+END_SRC
+
 * Window Movement
 
 Use Shift-<Arrow> to navigate through windows.
