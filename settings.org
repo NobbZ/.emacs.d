@@ -2,9 +2,13 @@
 #+AUTHOR: Norbert Melzer
 #+EMAIL: timmelzer@gmail.com
 
-#+TOC: figures
-
 * Foreword
+
+A properly rendered version of this document is available at the
+following places:
+
+- PDF  :: [[https://nobbz.github.io/emacs.d/settings.pdf]]
+- HTML :: [[https://nobbz.github.io/emacs.d/settings.html]]
 
 This file is massively inspired/shamelessely stolen from the one shown
 at [[https://ogbe.net/emacsconfig.html]]
