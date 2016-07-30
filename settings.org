@@ -253,6 +253,7 @@ Add a line for each mode:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'minibuffer-setup-hook 'no-trailing-whitespace)
+  (add-hook 'term-mode-hook        'no-trailing-whitespace)
 #+END_SRC
 * TODO Dired
 
