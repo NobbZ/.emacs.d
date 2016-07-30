@@ -23,15 +23,13 @@ figure [[fig:current]], while the planned way to load can be found in
 figure [[fig:planned]].
 
 #+BEGIN_SRC ditaa :file structure.png :exports: result
-/------------------\
-|                  |
-|     init.el      |
-|                  |
-|   +--------------+
-|   |              |
-|   | settings.org |
-|   |              |
-\---+--------------/
+/----------------\
+|   init.el      |
+| /--------------+
+| | customize.el |
+| +--------------+
+| | settings.org |
+\-+--------------/
 #+END_SRC
 
 #+CAPTION: Current file loading structure
@@ -40,19 +38,15 @@ figure [[fig:planned]].
 [[file:structure.png]]
 
 #+BEGIN_SRC ditaa :file structure-planned.png :exports: result
-/------------------\
-|                  |
-|     init.el      |
-|                  |
-|   +--------------+
-|   |              |
-|   |   ~/.emacs   :
-|   |              |
-|   +--------------+
-|   |              |
-|   | settings.org |
-|   |              |
-\---+--------------/
+/----------------\
+|   init.el      |
+| /--------------+
+| | customize.el |
+| +--------------+
+| |   ~/.emacs   :
+| +--------------+
+| | settings.org |
+\-+--------------/
 #+END_SRC
 
 #+CAPTION: Planned file loading structure
