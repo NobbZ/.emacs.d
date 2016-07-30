@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-07-30 Sa 12:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>NobbZ-Emacs Configuration</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Norbert Melzer" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">NobbZ-Emacs Configuration</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. Foreword</a></li>
+<li><a href="#orgheadline2">2. Helpers</a></li>
+<li><a href="#orgheadline3">3. Packages</a></li>
+<li><a href="#orgheadline4">4. <span class="todo TODO">TODO</span> Security</a></li>
+<li><a href="#orgheadline12">5. Appearance, UI Elements, and the Emacs server</a>
+<ul>
+<li><a href="#orgheadline5">5.1. The server</a></li>
+<li><a href="#orgheadline11">5.2. Appearance</a>
+<ul>
+<li><a href="#orgheadline6">5.2.1. Theme &amp; Faces</a></li>
+<li><a href="#orgheadline7">5.2.2. UI Elements</a></li>
+<li><a href="#orgheadline8">5.2.3. Welcome Screen</a></li>
+<li><a href="#orgheadline9">5.2.4. <span class="todo TODO">TODO</span> Window Geometry</a></li>
+<li><a href="#orgheadline10">5.2.5. <span class="todo TODO">TODO</span> Scrolling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline15">6. Pathes</a>
+<ul>
+<li><a href="#orgheadline13">6.1. Autosave and Backup</a></li>
+<li><a href="#orgheadline14">6.2. <span class="todo TODO">TODO</span> Dropbox</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline16">7. Window Movement</a></li>
+<li><a href="#orgheadline17">8. Debugging</a></li>
+<li><a href="#orgheadline19">9. Traiiling Whitespace</a>
+<ul>
+<li><a href="#orgheadline18">9.1. But do not display in some modes</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline21">10. <span class="todo TODO">TODO</span> Dired</a>
+<ul>
+<li><a href="#orgheadline20">10.1. General Settings</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline34">11. Org-Mode</a>
+<ul>
+<li><a href="#orgheadline22">11.1. Installation</a></li>
+<li><a href="#orgheadline23">11.2. General settings</a></li>
+<li><a href="#orgheadline29">11.3. Allow execution of src-blocks</a>
+<ul>
+<li><a href="#orgheadline24">11.3.1. \LaTeX</a></li>
+<li><a href="#orgheadline25">11.3.2. Emacs-Lisp</a></li>
+<li><a href="#orgheadline26">11.3.3. Ditaa</a></li>
+<li><a href="#orgheadline27">11.3.4. Applying the stuff</a></li>
+<li><a href="#orgheadline28">11.3.5. Execution security</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline30">11.4. Syntax-Highlighting in sourceblocks</a></li>
+<li><a href="#orgheadline31">11.5. HTML Export</a></li>
+<li><a href="#orgheadline32">11.6. PDF-Export</a></li>
+<li><a href="#orgheadline33">11.7. Agenda</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> Foreword</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This file is massively inspired/shamelessely stolen from the one shown
+at <a href="https://ogbe.net/emacsconfig.html">https://ogbe.net/emacsconfig.html</a>
+</p>
+
+<p>
+Before this file is actually loaded the following <code>init.el</code> is
+executed.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="font-style: italic;">;; </span><span style="font-style: italic;">NobbZ init.el</span>
+<span style="font-style: italic;">;; </span><span style="font-style: italic;">Real stuff happens in =settings.org=</span>
+
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">package</span>)
+(setq package-archives
+      '((<span style="font-style: italic;">"gnu"</span>   . <span style="font-style: italic;">"https://elpa.gnu.org/packages/"</span>)
+        (<span style="font-style: italic;">"melpa"</span> . <span style="font-style: italic;">"https://melpa.org/packages/"</span>)
+        (<span style="font-style: italic;">"org"</span>   . <span style="font-style: italic;">"http://orgmode.org/elpa/"</span>)))
+(<span style="font-weight: bold;">when</span> (boundp 'package-pinned-packages)
+  (setq package-pinned-packages
+        '((org . <span style="font-style: italic;">"org"</span>))))
+(package-initialize)
+(<span style="font-weight: bold;">unless</span> (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(<span style="font-weight: bold;">eval-when-compile</span>
+  (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">use-package</span>))
+
+<span style="font-style: italic;">;; </span><span style="font-style: italic;">Set the load path</span>
+(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/lisp/"</span>)
+(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/lisp"</span>)
+
+<span style="font-style: italic;">;; </span><span style="font-style: italic;">Moved all the custom.el stuff into its own file called</span>
+<span style="font-style: italic;">;; </span><span style="font-style: italic;">=~/.emacs.d/customize.el=</span>
+(setq custom-file <span style="font-style: italic;">"~/.emacs.d/customize.el"</span>)
+(load custom-file)
+
+(setq hostname
+  (replace-regexp-in-string <span style="font-style: italic;">"\\`[ \t\n]*"</span> <span style="font-style: italic;">""</span>
+    (replace-regexp-in-string <span style="font-style: italic;">"[ \t\n]*\\'"</span> <span style="font-style: italic;">""</span>
+      (shell-command-to-string <span style="font-style: italic;">"hostname"</span>))))
+
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org</span>)
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">org-block-begin-line</span>
+  '((t (<span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#99968b"</span> <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#303030"</span>)))
+  <span style="font-style: italic;">"Face used for line delimiting the begin of source blocks."</span>)
+
+(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">org-block-end-line</span>
+  '((t (<span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#99968b"</span> <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#303030"</span>)))
+  <span style="font-style: italic;">"Face used for line delimiting the end of source blocks."</span>)
+
+(org-babel-load-file <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>)
+</pre>
+</div>
+
+<p>
+The structure of the loading sequence as it is today can be seen in
+figure <a href="#orgparagraph1">1</a>, while the planned way to load can be found in
+figure <a href="#orgparagraph2">2</a>.
+</p>
+
+
+<div id="orgparagraph1" class="figure">
+<p><img src="structure.png" alt="structure.png" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Current file loading structure</p>
+</div>
+
+
+<div id="orgparagraph2" class="figure">
+<p><img src="structure-planned.png" alt="structure-planned.png" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Planned file loading structure</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> Helpers</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Small little helpers which make it easier to live-reload the config:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reload-settings</span> ()
+  (interactive)
+  (org-babel-load-file <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">settings</span> ()
+  (interactive)
+  (find-file <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> Packages</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">  (setq package-list '(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">framemove</span> htmlize))
+
+<span style="font-style: italic;">;;  </span><span style="font-style: italic;">(unless package-archive-contents</span>
+<span style="font-style: italic;">;;    </span><span style="font-style: italic;">(package-refresh-contents))</span>
+
+  (<span style="font-weight: bold;">dolist</span> (package package-list)
+    (<span style="font-weight: bold;">unless</span> (package-installed-p package)
+      (package-install package)))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">framemove</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Security</h2>
+</div>
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12"><span class="section-number-2">5</span> Appearance, UI Elements, and the Emacs server</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+First start a server and then set some important appearance
+settings. Note that some of the settings are in <a href="init.el"><code>init.el</code></a>.
+</p>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">5.1</span> The server</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Start the server if not already running.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(load <span style="font-style: italic;">"server"</span>)
+(<span style="font-weight: bold;">unless</span> (server-running-p) (server-start))
+</pre>
+</div>
+
+<p>
+When connected to a server using <code>emacsclient</code>, we want to kill the
+client using <code>C-x k</code>, the way it seems natural.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'server-switch-hook
+          (<span style="font-weight: bold;">lambda</span> ()
+            (<span style="font-weight: bold;">when</span> (current-local-map)
+              (use-local-map (copy-keymap (current-local-map))))
+            (local-set-key (kbd <span style="font-style: italic;">"C-x k"</span>) 'server-edit)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">5.2</span> Appearance</h3>
+<div class="outline-text-3" id="text-5-2">
+</div><div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">5.2.1</span> Theme &amp; Faces</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(load-theme 'wheatgrass) <span style="font-style: italic;">;; </span><span style="font-style: italic;">A nice dark theme</span>
+(set-face-attribute 'default nil <span style="font-weight: bold;">:height</span> 100) <span style="font-style: italic;">;; </span><span style="font-style: italic;">10pt font height</span>
+(set-face-attribute 'default nil <span style="font-weight: bold;">:family</span> <span style="font-style: italic;">"Consolas"</span>)
+(set-face-attribute 'fringe  nil <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#2d2d2d"</span>)
+(set-face-attribute 'font-lock-comment-face nil <span style="font-weight: bold;">:slant</span> 'italic <span style="font-weight: bold;">:weight</span> 'semibold)
+<span style="font-style: italic;">;; </span><span style="font-style: italic;">(set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")</span>
+
+(global-hl-line-mode t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">5.2.2</span> UI Elements</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<p>
+Get rid of that ugly disturbing stuff no one needs…
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(menu-bar-mode -1)
+(<span style="font-weight: bold;">when</span> (display-graphic-p)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4">5.2.3</span> Welcome Screen</h4>
+<div class="outline-text-4" id="text-5-2-3">
+<p>
+We also want to get rid of the splash screen and start into home
+directory.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq inhibit-startup-message t)
+(setq inhibit-splash-screen t)
+(setq initial-scratch-message nil)
+(setq initial-buffer-choice <span style="font-style: italic;">"~/"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">5.2.4</span> <span class="todo TODO">TODO</span> Window Geometry</h4>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">5.2.5</span> <span class="todo TODO">TODO</span> Scrolling</h4>
+<div class="outline-text-4" id="text-5-2-5">
+<p>
+I need to find out how to let emacs behave as with <code>spacemacs</code>
+<code>smoothscrolling</code> setting.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15"><span class="section-number-2">6</span> Pathes</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">6.1</span> Autosave and Backup</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Autosaves directly beneath the edited files do clutter up the
+sourcetree. Instead let's throw them inside <code>~/tmp/</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">backup-dir</span>   (expand-file-name <span style="font-style: italic;">"~/tmp/emacs_backup/"</span>))
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">autosave-dir</span> (expand-file-name <span style="font-style: italic;">"~/tmp/emacs_autosave/"</span>))
+
+(setq backup-directory-alist (list (cons <span style="font-style: italic;">".*"</span> backup-dir)))
+(setq auto-save-list-file-prefix autosave-dir)
+(setq auto-save-file-name-transforms `((<span style="font-style: italic;">".*"</span> ,autosave-dir t)))
+(setq tramp-backup-directory-alist backup-directory-alist)
+(setq tramp-auto-save-directory autosave-dir)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">6.2</span> <span class="todo TODO">TODO</span> Dropbox</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+We need to know the basepath of dropbox.
+</p>
+
+<p>
+The current function to read the path from <code>dropbox</code>' config is very
+ugly and needs some care to make it more beautiful.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">json</span>)
+
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">find-dropbox-folder</span> ()
+  (interactive)
+  (<span style="font-weight: bold;">let</span> ((json-path (<span style="font-weight: bold;">if</span> (eq system-type 'gnu/linux)
+                       (expand-file-name <span style="font-style: italic;">"~/.dropbox/info.json"</span>)
+                     (concat (getenv <span style="font-style: italic;">"APPDATA"</span>) <span style="font-style: italic;">"\\..\\Local\\Dropbox\\info.json"</span>))))
+    (cdr (assoc 'path (car (json-read-file json-path))))))
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">dropbox-base-path</span> (find-dropbox-folder))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">7</span> Window Movement</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Use Shift-&lt;Arrow&gt; to navigate through windows.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">framemove</span>)
+(windmove-default-keybindings)
+(setq framemove-hook-into-windmove t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17"><span class="section-number-2">8</span> Debugging</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Setup some keys to make it easier to use GUD.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"&lt;f7&gt;"</span>) 'gud-cont)
+(global-set-key (kbd <span style="font-style: italic;">"&lt;f6&gt;"</span>) 'gud-step)
+(global-set-key (kbd <span style="font-style: italic;">"&lt;f5&gt;"</span>) 'gud-next)
+(global-set-key (kbd <span style="font-style: italic;">"&lt;f8&gt;"</span>) 'gud-finish)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">9</span> Traiiling Whitespace</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+We want to see trailing whitespace, since it is the devil.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">whitespace</span>)
+(setq-default show-trailing-whitespace t)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">9.1</span> But do not display in some modes</h3>
+<div class="outline-text-3" id="text-9-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">no-trailing-whitespace</span> ()
+  (setq show-trailing-whitespace nil))
+</pre>
+</div>
+
+<p>
+Add a line for each mode:
+</p>
+
+<pre class="example">
+(add-hook 'buffer-mode-hook 'no-trailing-whitespace)
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'minibuffer-setup-hook 'no-trailing-whitespace)
+(add-hook 'term-mode-hook        'no-trailing-whitespace)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21"><span class="section-number-2">10</span> <span class="todo TODO">TODO</span> Dired</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">10.1</span> General Settings</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+The dirst two lines stop dired from asking me if I really want to
+recursively delete/copy directories. I never answer "no" to that
+question.
+</p>
+
+<p>
+The other lines enable "Do What I Mean" mode for dired, using the
+other buffers location as target when copying in split-screen mode.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq dired-recursive-copies 'always)
+(setq dired-recursive-deletes 'always)
+(setq dired-dwim-target t)
+(setq dired-listing-switches <span style="font-style: italic;">"-alh"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34"><span class="section-number-2">11</span> Org-Mode</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<a href="http://orgmode.org/">org-mode</a> might be THE killer app for emacs.
+</p>
+</div>
+
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">11.1</span> Installation</h3>
+<div class="outline-text-3" id="text-11-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">org</span>
+  <span style="font-weight: bold;">:ensure</span> t
+  <span style="font-weight: bold;">:defer</span> t
+  <span style="font-weight: bold;">:pin</span> org)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">11.2</span> General settings</h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+Some general settings for org.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org</span>)
+(setq-default
+ org-return-follows-link t
+ org-image-actual-width '(400)
+ org-highlight-latex-and-related '(latex script entities))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">11.3</span> Allow execution of src-blocks</h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+First we need an empty list
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq nobbz-babel-languages-alist '())
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">11.3.1</span> \LaTeX</h4>
+<div class="outline-text-4" id="text-11-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ob-latex</span>)
+(add-to-list 'nobbz-babel-languages-alist '(latex . t))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline25" class="outline-4">
+<h4 id="orgheadline25"><span class="section-number-4">11.3.2</span> Emacs-Lisp</h4>
+<div class="outline-text-4" id="text-11-3-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'nobbz-babel-languages-alist '(emacs-lisp . t))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">11.3.3</span> Ditaa</h4>
+<div class="outline-text-4" id="text-11-3-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'nobbz-babel-languages-alist '(ditaa . t))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline27" class="outline-4">
+<h4 id="orgheadline27"><span class="section-number-4">11.3.4</span> Applying the stuff</h4>
+<div class="outline-text-4" id="text-11-3-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(org-babel-do-load-languages
+ 'org-babel-load-languages
+ nobbz-babel-languages-alist)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="hello-world.png" alt="hello-world.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-4">
+<h4 id="orgheadline28"><span class="section-number-4">11.3.5</span> Execution security</h4>
+<div class="outline-text-4" id="text-11-3-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">nobbz-org-confirm-babel-evaluate</span> (lang body)
+  (not (string= lang <span style="font-style: italic;">"ditaa"</span>))) <span style="font-style: italic;">; </span><span style="font-style: italic;">don't ask for ditaa</span>
+(setq org-confirm-babel-evaluate 'nobbz-org-confirm-babel-evaluate)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">11.4</span> Syntax-Highlighting in sourceblocks</h3>
+<div class="outline-text-3" id="text-11-4">
+<p>
+This is a very important feature in an org-document. Also adds native
+<code>&lt;tab&gt;</code> behaviour in those blocks.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq
+ org-src-fontify-natively t
+ org-src-tab-acts-natively t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">11.5</span> HTML Export</h3>
+<div class="outline-text-3" id="text-11-5">
+<p>
+There shall be a custom stylesheet for HTML export.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-html</span>)
+(setq org-html-htmlize-output-type 'inline-css)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">11.6</span> PDF-Export</h3>
+<div class="outline-text-3" id="text-11-6">
+<p>
+Use minted as a highlighter.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-latex</span>)
+(add-to-list 'org-latex-packages-alist '(<span style="font-style: italic;">""</span> <span style="font-style: italic;">"minted"</span>))
+(setq org-latex-listings 'minted)
+</pre>
+</div>
+
+<p>
+Also we want to use <code>latexmk</code> as the build-manager and <code>lualatex</code> as
+the engine.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-latex-pdf-process
+      '(<span style="font-style: italic;">"latexmk -lualatex -f -shell-escape %f"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">11.7</span> Agenda</h3>
+<div class="outline-text-3" id="text-11-7">
+<p>
+We want to have this file itself on our agenda.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-default-notes-file (concat dropbox-base-path <span style="font-style: italic;">"/Dokumente/org/TODO.org"</span>))
+(add-to-list 'org-agenda-files (concat dropbox-base-path <span style="font-style: italic;">"/Dokumente/org/TODO.org"</span>))
+(add-to-list 'org-agenda-files <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Norbert Melzer</p>
+<p class="date">Created: 2016-07-30 Sa 12:02</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
