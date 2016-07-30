@@ -2,6 +2,8 @@
 #+AUTHOR: Norbert Melzer
 #+EMAIL: timmelzer@gmail.com
 
+#+TOC: figures
+
 * Foreword
 
 This file is massively inspired/shamelessely stolen from the one shown
@@ -11,6 +13,48 @@ Before this file is actually loaded the following =init.el= is
 executed.
 
 #+INCLUDE: "init.el" src emacs-lisp
+
+The structure of the loading sequence as it is today can be seen in
+figure [[fig:current]], while the planned way to load can be found in
+figure [[fig:planned]].
+
+#+BEGIN_SRC ditaa :file structure.png :exports: result
+/------------------\
+|                  |
+|     init.el      |
+|                  |
+|   +--------------+
+|   |              |
+|   | settings.org |
+|   |              |
+\---+--------------/
+#+END_SRC
+
+#+CAPTION: Current file loading structure
+#+NAME: fig:current
+#+RESULTS:
+[[file:structure.png]]
+
+#+BEGIN_SRC ditaa :file structure-planned.png :exports: result
+/------------------\
+|                  |
+|     init.el      |
+|                  |
+|   +--------------+
+|   |              |
+|   |   ~/.emacs   :
+|   |              |
+|   +--------------+
+|   |              |
+|   | settings.org |
+|   |              |
+\---+--------------/
+#+END_SRC
+
+#+CAPTION: Planned file loading structure
+#+NAME: fig:planned
+#+RESULTS:
+[[file:structure.png]]
 
 * Helpers
 
