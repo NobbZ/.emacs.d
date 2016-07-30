@@ -17,3 +17,9 @@ _pages/%: %
 
 %.html: %.org
 	emacs --batch -l ~/.emacs.d/init.el $< -f org-html-export-to-html --kill
+
+clean:
+	rm -rfv *.html
+	rm -rfv *.pdf
+	rm -rfv *.tex
+	rm -rfv *.png
