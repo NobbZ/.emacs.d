@@ -342,6 +342,14 @@ First we need an empty list
 #+RESULTS:
 [[file:images/hello-world.png]]
 
+*** Execution security
+
+#+BEGIN_SRC emacs-lisp
+  (defun nobbz-org-confirm-babel-evaluate (lang body)
+    (not (string= lang "ditaa"))) ; don't ask for ditaa
+  (setq org-confirm-babel-evaluate 'nobbz-org-confirm-babel-evaluate)
+#+END_SRC
+
 ** Syntax-Highlighting in sourceblocks
 
 This is a very important feature in an org-document. Also adds native
