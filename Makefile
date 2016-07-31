@@ -8,6 +8,7 @@ PNGS  := $(PNG_FILES:%=_pages/%)
 
 pages: $(PDFS) $(HTMLS) $(PNGS)
 	cd _pages; git add $(^:_pages/%=%); git commit -m $(shell date +\"%Y-%M-%dT%T\"); git push
+	git push
 
 _pages/%: %
 	cp $< $@
