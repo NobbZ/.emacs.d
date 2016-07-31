@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-07-30 Sa 14:56 -->
+<!-- 2016-07-31 So 13:10 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>NobbZ-Emacs Configuration</title>
@@ -172,57 +172,67 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orgheadline1">1. Foreword</a></li>
 <li><a href="#orgheadline2">2. Helpers</a></li>
-<li><a href="#orgheadline3">3. Packages</a></li>
-<li><a href="#orgheadline4">4. <span class="todo TODO">TODO</span> Security</a></li>
-<li><a href="#orgheadline12">5. Appearance, UI Elements, and the Emacs server</a>
+<li><a href="#orgheadline7">3. Packages</a>
 <ul>
-<li><a href="#orgheadline5">5.1. The server</a></li>
-<li><a href="#orgheadline11">5.2. Appearance</a>
+<li><a href="#orgheadline6">3.1. which-key</a>
 <ul>
-<li><a href="#orgheadline6">5.2.1. Theme &amp; Faces</a></li>
-<li><a href="#orgheadline7">5.2.2. UI Elements</a></li>
-<li><a href="#orgheadline8">5.2.3. Welcome Screen</a></li>
-<li><a href="#orgheadline9">5.2.4. <span class="todo TODO">TODO</span> Window Geometry</a></li>
-<li><a href="#orgheadline10">5.2.5. <span class="todo TODO">TODO</span> Scrolling</a></li>
+<li><a href="#orgheadline3">3.1.1. Install and load</a></li>
+<li><a href="#orgheadline4">3.1.2. Configuration</a></li>
+<li><a href="#orgheadline5">3.1.3. Key-chords</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline15">6. Pathes</a>
+<li><a href="#orgheadline8">4. <span class="todo TODO">TODO</span> Security</a></li>
+<li><a href="#orgheadline16">5. Appearance, UI Elements, and the Emacs server</a>
 <ul>
-<li><a href="#orgheadline13">6.1. Autosave and Backup</a></li>
-<li><a href="#orgheadline14">6.2. <span class="todo TODO">TODO</span> Dropbox</a></li>
+<li><a href="#orgheadline9">5.1. The server</a></li>
+<li><a href="#orgheadline15">5.2. Appearance</a>
+<ul>
+<li><a href="#orgheadline10">5.2.1. Theme &amp; Faces</a></li>
+<li><a href="#orgheadline11">5.2.2. UI Elements</a></li>
+<li><a href="#orgheadline12">5.2.3. Welcome Screen</a></li>
+<li><a href="#orgheadline13">5.2.4. <span class="todo TODO">TODO</span> Window Geometry</a></li>
+<li><a href="#orgheadline14">5.2.5. <span class="todo TODO">TODO</span> Scrolling</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline16">7. Window Movement</a></li>
-<li><a href="#orgheadline17">8. Debugging</a></li>
-<li><a href="#orgheadline19">9. Traiiling Whitespace</a>
-<ul>
-<li><a href="#orgheadline18">9.1. But do not display in some modes</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline21">10. <span class="todo TODO">TODO</span> Dired</a>
+<li><a href="#orgheadline19">6. Pathes</a>
 <ul>
-<li><a href="#orgheadline20">10.1. General Settings</a></li>
+<li><a href="#orgheadline17">6.1. Autosave and Backup</a></li>
+<li><a href="#orgheadline18">6.2. <span class="todo TODO">TODO</span> Dropbox</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline34">11. Org-Mode</a>
+<li><a href="#orgheadline20">7. Window Movement</a></li>
+<li><a href="#orgheadline21">8. Debugging</a></li>
+<li><a href="#orgheadline23">9. Traiiling Whitespace</a>
 <ul>
-<li><a href="#orgheadline22">11.1. Installation</a></li>
-<li><a href="#orgheadline23">11.2. General settings</a></li>
-<li><a href="#orgheadline29">11.3. Allow execution of src-blocks</a>
-<ul>
-<li><a href="#orgheadline24">11.3.1. \LaTeX</a></li>
-<li><a href="#orgheadline25">11.3.2. Emacs-Lisp</a></li>
-<li><a href="#orgheadline26">11.3.3. Ditaa</a></li>
-<li><a href="#orgheadline27">11.3.4. Applying the stuff</a></li>
-<li><a href="#orgheadline28">11.3.5. Execution security</a></li>
+<li><a href="#orgheadline22">9.1. But do not display in some modes</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline30">11.4. Syntax-Highlighting in sourceblocks</a></li>
-<li><a href="#orgheadline31">11.5. HTML Export</a></li>
-<li><a href="#orgheadline32">11.6. PDF-Export</a></li>
-<li><a href="#orgheadline33">11.7. Agenda</a></li>
+<li><a href="#orgheadline25">10. <span class="todo TODO">TODO</span> Dired</a>
+<ul>
+<li><a href="#orgheadline24">10.1. General Settings</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline38">11. Org-Mode</a>
+<ul>
+<li><a href="#orgheadline26">11.1. Installation</a></li>
+<li><a href="#orgheadline27">11.2. General settings</a></li>
+<li><a href="#orgheadline33">11.3. Allow execution of src-blocks</a>
+<ul>
+<li><a href="#orgheadline28">11.3.1. \LaTeX</a></li>
+<li><a href="#orgheadline29">11.3.2. Emacs-Lisp</a></li>
+<li><a href="#orgheadline30">11.3.3. Ditaa</a></li>
+<li><a href="#orgheadline31">11.3.4. Applying the stuff</a></li>
+<li><a href="#orgheadline32">11.3.5. Execution security</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline34">11.4. Syntax-Highlighting in sourceblocks</a></li>
+<li><a href="#orgheadline35">11.5. HTML Export</a></li>
+<li><a href="#orgheadline36">11.6. PDF-Export</a></li>
+<li><a href="#orgheadline37">11.7. Agenda</a></li>
 </ul>
 </li>
 </ul>
@@ -342,8 +352,8 @@ Small little helpers which make it easier to live-reload the config:
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="orgheadline3"><span class="section-number-2">3</span> Packages</h2>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">3</span> Packages</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
@@ -364,13 +374,75 @@ Small little helpers which make it easier to live-reload the config:
 </pre>
 </div>
 </div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">3.1</span> which-key</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<code>which-key</code> provides a minor mode, that displays the key bindings
+following your currently entered incomplete command in a pop up.
+</p>
+
+<p>
+<a href="https://github.com/justbur/emacs-which-key">https://github.com/justbur/emacs-which-key</a>
+</p>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Security</h2>
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">3.1.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'which-key)
+  (package-install 'which-key))
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">which-key</span>)
+(which-key-mode)
+</pre>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">5</span> Appearance, UI Elements, and the Emacs server</h2>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">3.1.2</span> Configuration</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+1 second is a very long delay, I do think that about a tenth of a
+second is enough.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq which-key-idle-delay 0.1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">3.1.3</span> Key-chords</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+<code>which-key</code> does not have any key-chords on its own, but I will enter
+some global stuff here.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(which-key-add-key-based-replacements
+  <span style="font-style: italic;">"C-x C-f"</span> <span style="font-style: italic;">"Open file"</span>
+  <span style="font-style: italic;">"C-x C-s"</span> <span style="font-style: italic;">"Save file"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Security</h2>
+</div>
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">5</span> Appearance, UI Elements, and the Emacs server</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 First start a server and then set some important appearance
@@ -378,8 +450,8 @@ settings. Note that some of the settings are in <a href="init.el"><code>init.el<
 </p>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">5.1</span> The server</h3>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">5.1</span> The server</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Start the server if not already running.
@@ -409,11 +481,11 @@ client using <code>C-x k</code>, the way it seems natural.
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">5.2</span> Appearance</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">5.2</span> Appearance</h3>
 <div class="outline-text-3" id="text-5-2">
-</div><div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">5.2.1</span> Theme &amp; Faces</h4>
+</div><div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">5.2.1</span> Theme &amp; Faces</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <div class="org-src-container">
 
@@ -430,8 +502,8 @@ client using <code>C-x k</code>, the way it seems natural.
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">5.2.2</span> UI Elements</h4>
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11"><span class="section-number-4">5.2.2</span> UI Elements</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 Get rid of that ugly disturbing stuff no one needs…
@@ -448,8 +520,8 @@ Get rid of that ugly disturbing stuff no one needs…
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="orgheadline8"><span class="section-number-4">5.2.3</span> Welcome Screen</h4>
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">5.2.3</span> Welcome Screen</h4>
 <div class="outline-text-4" id="text-5-2-3">
 <p>
 We also want to get rid of the splash screen and start into home
@@ -467,12 +539,12 @@ directory.
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-4">
-<h4 id="orgheadline9"><span class="section-number-4">5.2.4</span> <span class="todo TODO">TODO</span> Window Geometry</h4>
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><span class="section-number-4">5.2.4</span> <span class="todo TODO">TODO</span> Window Geometry</h4>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="orgheadline10"><span class="section-number-4">5.2.5</span> <span class="todo TODO">TODO</span> Scrolling</h4>
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">5.2.5</span> <span class="todo TODO">TODO</span> Scrolling</h4>
 <div class="outline-text-4" id="text-5-2-5">
 <p>
 I need to find out how to let emacs behave as with <code>spacemacs</code>
@@ -488,11 +560,11 @@ I need to find out how to let emacs behave as with <code>spacemacs</code>
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">6</span> Pathes</h2>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">6</span> Pathes</h2>
 <div class="outline-text-2" id="text-6">
-</div><div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">6.1</span> Autosave and Backup</h3>
+</div><div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">6.1</span> Autosave and Backup</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Autosaves directly beneath the edited files do clutter up the
@@ -514,8 +586,8 @@ sourcetree. Instead let's throw them inside <code>~/tmp/</code>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">6.2</span> <span class="todo TODO">TODO</span> Dropbox</h3>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">6.2</span> <span class="todo TODO">TODO</span> Dropbox</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 We need to know the basepath of dropbox.
@@ -543,8 +615,8 @@ ugly and needs some care to make it more beautiful.
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16"><span class="section-number-2">7</span> Window Movement</h2>
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20"><span class="section-number-2">7</span> Window Movement</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Use Shift-&lt;Arrow&gt; to navigate through windows.
@@ -560,8 +632,8 @@ Use Shift-&lt;Arrow&gt; to navigate through windows.
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">8</span> Debugging</h2>
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21"><span class="section-number-2">8</span> Debugging</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Setup some keys to make it easier to use GUD.
@@ -578,8 +650,8 @@ Setup some keys to make it easier to use GUD.
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19"><span class="section-number-2">9</span> Traiiling Whitespace</h2>
+<div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23"><span class="section-number-2">9</span> Traiiling Whitespace</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 We want to see trailing whitespace, since it is the devil.
@@ -593,8 +665,8 @@ We want to see trailing whitespace, since it is the devil.
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">9.1</span> But do not display in some modes</h3>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">9.1</span> But do not display in some modes</h3>
 <div class="outline-text-3" id="text-9-1">
 <div class="org-src-container">
 
@@ -620,11 +692,11 @@ Add a line for each mode:
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21"><span class="section-number-2">10</span> <span class="todo TODO">TODO</span> Dired</h2>
+<div id="outline-container-orgheadline25" class="outline-2">
+<h2 id="orgheadline25"><span class="section-number-2">10</span> <span class="todo TODO">TODO</span> Dired</h2>
 <div class="outline-text-2" id="text-10">
-</div><div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">10.1</span> General Settings</h3>
+</div><div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">10.1</span> General Settings</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 The dirst two lines stop dired from asking me if I really want to
@@ -648,17 +720,16 @@ other buffers location as target when copying in split-screen mode.
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgheadline34" class="outline-2">
-<h2 id="orgheadline34"><span class="section-number-2">11</span> Org-Mode</h2>
+<div id="outline-container-orgheadline38" class="outline-2">
+<h2 id="orgheadline38"><span class="section-number-2">11</span> Org-Mode</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 <a href="http://orgmode.org/">org-mode</a> might be THE killer app for emacs.
 </p>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">11.1</span> Installation</h3>
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26"><span class="section-number-3">11.1</span> Installation</h3>
 <div class="outline-text-3" id="text-11-1">
 <div class="org-src-container">
 
@@ -671,8 +742,8 @@ other buffers location as target when copying in split-screen mode.
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">11.2</span> General settings</h3>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">11.2</span> General settings</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 Some general settings for org.
@@ -691,8 +762,8 @@ Some general settings for org.
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-3">
-<h3 id="orgheadline29"><span class="section-number-3">11.3</span> Allow execution of src-blocks</h3>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">11.3</span> Allow execution of src-blocks</h3>
 <div class="outline-text-3" id="text-11-3">
 <p>
 First we need an empty list
@@ -705,8 +776,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24"><span class="section-number-4">11.3.1</span> \LaTeX</h4>
+<div id="outline-container-orgheadline28" class="outline-4">
+<h4 id="orgheadline28"><span class="section-number-4">11.3.1</span> \LaTeX</h4>
 <div class="outline-text-4" id="text-11-3-1">
 <div class="org-src-container">
 
@@ -717,8 +788,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">11.3.2</span> Emacs-Lisp</h4>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">11.3.2</span> Emacs-Lisp</h4>
 <div class="outline-text-4" id="text-11-3-2">
 <div class="org-src-container">
 
@@ -728,8 +799,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-4">
-<h4 id="orgheadline26"><span class="section-number-4">11.3.3</span> Ditaa</h4>
+<div id="outline-container-orgheadline30" class="outline-4">
+<h4 id="orgheadline30"><span class="section-number-4">11.3.3</span> Ditaa</h4>
 <div class="outline-text-4" id="text-11-3-3">
 <div class="org-src-container">
 
@@ -739,8 +810,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-4">
-<h4 id="orgheadline27"><span class="section-number-4">11.3.4</span> Applying the stuff</h4>
+<div id="outline-container-orgheadline31" class="outline-4">
+<h4 id="orgheadline31"><span class="section-number-4">11.3.4</span> Applying the stuff</h4>
 <div class="outline-text-4" id="text-11-3-4">
 <div class="org-src-container">
 
@@ -758,8 +829,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-4">
-<h4 id="orgheadline28"><span class="section-number-4">11.3.5</span> Execution security</h4>
+<div id="outline-container-orgheadline32" class="outline-4">
+<h4 id="orgheadline32"><span class="section-number-4">11.3.5</span> Execution security</h4>
 <div class="outline-text-4" id="text-11-3-5">
 <div class="org-src-container">
 
@@ -772,8 +843,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">11.4</span> Syntax-Highlighting in sourceblocks</h3>
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34"><span class="section-number-3">11.4</span> Syntax-Highlighting in sourceblocks</h3>
 <div class="outline-text-3" id="text-11-4">
 <p>
 This is a very important feature in an org-document. Also adds native
@@ -790,8 +861,8 @@ This is a very important feature in an org-document. Also adds native
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-3">
-<h3 id="orgheadline31"><span class="section-number-3">11.5</span> HTML Export</h3>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">11.5</span> HTML Export</h3>
 <div class="outline-text-3" id="text-11-5">
 <p>
 There shall be a custom stylesheet for HTML export.
@@ -806,8 +877,8 @@ There shall be a custom stylesheet for HTML export.
 </div>
 </div>
 
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">11.6</span> PDF-Export</h3>
+<div id="outline-container-orgheadline36" class="outline-3">
+<h3 id="orgheadline36"><span class="section-number-3">11.6</span> PDF-Export</h3>
 <div class="outline-text-3" id="text-11-6">
 <p>
 Use minted as a highlighter.
@@ -835,8 +906,8 @@ the engine.
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-3">
-<h3 id="orgheadline33"><span class="section-number-3">11.7</span> Agenda</h3>
+<div id="outline-container-orgheadline37" class="outline-3">
+<h3 id="orgheadline37"><span class="section-number-3">11.7</span> Agenda</h3>
 <div class="outline-text-3" id="text-11-7">
 <p>
 We want to have this file itself on our agenda.
@@ -855,7 +926,7 @@ We want to have this file itself on our agenda.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Norbert Melzer</p>
-<p class="date">Created: 2016-07-30 Sa 14:56</p>
+<p class="date">Created: 2016-07-31 So 13:10</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
