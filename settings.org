@@ -1,6 +1,6 @@
-#+TITLE: NobbZ-Emacs Configuration
+#+TITLE:  NobbZ-Emacs Configuration
 #+AUTHOR: Norbert Melzer
-#+EMAIL: timmelzer@gmail.com
+#+EMAIL:  timmelzer@gmail.com
 
 * Foreword
 
