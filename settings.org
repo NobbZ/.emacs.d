@@ -202,6 +202,30 @@ ugly and needs some care to make it more beautiful.
       (cdr (assoc 'path (car (json-read-file json-path))))))
 #+END_SRC
 
+* which-key
+
+=which-key= provides a minor mode, that displays the key bindings
+following your currently entered incomplete command in a pop up.
+
+[[https://github.com/justbur/emacs-which-key]]
+
+** Install and load
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'which-key)
+    (package-install 'which-key))
+  (require 'which-key)
+  (which-key-mode)
+#+END_SRC
+
+** Configuration
+
+1 second is a very long delay, I do think that about a tenth of a
+second is enough.
+
+#+BEGIN_SRC emacs-lisp
+  (setq which-key-idle-delay 0.1)
+#+END_SRC
 * Window Movement
 
 Use Shift-<Arrow> to navigate through windows.
@@ -266,31 +290,6 @@ other buffers location as target when copying in split-screen mode.
   (setq dired-dwim-target t)
   (setq dired-listing-switches "-alh")
 #+END_SRC
-* which-key
-
-=which-key= provides a minor mode, that displays the key bindings
-following your currently entered incomplete command in a pop up.
-
-[[https://github.com/justbur/emacs-which-key]]
-
-** Install and load
-
-#+BEGIN_SRC emacs-lisp
-  (unless (package-installed-p 'which-key)
-    (package-install 'which-key))
-  (require 'which-key)
-  (which-key-mode)
-#+END_SRC
-
-** Configuration
-
-1 second is a very long delay, I do think that about a tenth of a
-second is enough.
-
-#+BEGIN_SRC emacs-lisp
-  (setq which-key-idle-delay 0.1)
-#+END_SRC
-
 * Org-Mode
 
 [[http://orgmode.org/][org-mode]] might be THE killer app for emacs.
