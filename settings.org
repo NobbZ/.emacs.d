@@ -242,6 +242,8 @@ ugly and needs some care to make it more beautiful.
 Use Shift-<Arrow> to navigate through windows.
 
 #+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'framemove)
+    (package-install 'framemove))
   (require 'framemove)
   (windmove-default-keybindings)
   (setq framemove-hook-into-windmove t)
