@@ -8,7 +8,7 @@
         ("org"   . "http://orgmode.org/elpa/")))
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages
-	'((org . "org"))))
+        '((org . "org"))))
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
