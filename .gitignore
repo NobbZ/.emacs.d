@@ -12,3 +12,7 @@
 *.png
 
 _minted*/
+server/
+url/
+bookmarks
+.org-id-locations
