@@ -84,7 +84,6 @@ Small little helpers which make it easier to live-reload the config:
 (use-package framemove)
 
 #+END_SRC
-
 ** which-key
 
 =which-key= provides a minor mode, that displays the key bindings
@@ -120,7 +119,19 @@ some global stuff here.
     "C-x C-f" "Open file"
     "C-x C-s" "Save file")
 #+END_SRC
+** project-explorer
+=project-explorer= is a tree explorer.
 
+[[https://github.com/sabof/project-explorer]]
+*** Install and load
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'project-explorer)
+    (package-install 'project-explorer))
+  (require 'project-explorer)
+#+END_SRC
+*** Configuration
+There is nothing special to configure right now.
+*** TODO Key-chords
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
