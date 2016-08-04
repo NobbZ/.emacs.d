@@ -195,6 +195,14 @@ I need to find out how to let emacs behave as with =spacemacs=
 
 #+END_SRC
 
+* Encoding
+
+Most of the time I want to have =UTF-8= as my file encoding.
+
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment "UTF-8")
+#+END_SRC
+
 * Pathes
 
 ** Autosave and Backup
