@@ -147,6 +147,13 @@ navigation for puppet-code.
     (package-install 'puppet-mode))
 #+END_SRC
 
+Also we want to open =Puppetfile=s in =ruby-mode=.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list
+   'auto-mode-alist '("\\`Puppetfile\\'" . ruby-mode))
+#+END_SRC
+
 *** Key-Chords
 
 #+BEGIN_SRC emacs-lisp
