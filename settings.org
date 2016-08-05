@@ -125,10 +125,14 @@ some global stuff here.
 
 [[https://github.com/sabof/project-explorer]]
 *** Install and load
+
+We are only allowed to load =project-explorer= when in interactive mode.
+
 #+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'project-explorer)
     (package-install 'project-explorer))
-  (require 'project-explorer)
+  (unless noninteractive
+    (require 'project-explorer))
 #+END_SRC
 *** Configuration
 There is nothing special to configure right now.
@@ -246,7 +250,7 @@ We want to use =FiraCode= if possible by any means.
 
 *** UI Elements
 
-Get rid of that ugly disturbing stuff no one needsâ€¦
+Get rid of that ugly disturbing stuff no one needs…
 
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
