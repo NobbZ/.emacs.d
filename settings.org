@@ -132,6 +132,34 @@ some global stuff here.
 *** Configuration
 There is nothing special to configure right now.
 *** TODO Key-chords
+
+** Puppet-Mode
+
+=puppet-mode= does provide syntax-highlighting, alignemt and
+navigation for puppet-code.
+
+[[https://github.com/lunaryorn/puppet-mode]]
+
+*** Install and load
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'puppet-mode)
+    (package-install 'puppet-mode))
+#+END_SRC
+
+*** Key-Chords
+
+#+BEGIN_SRC emacs-lisp
+  (which-key-add-major-mode-key-based-replacements 'puppet-mode
+    "C-c C-a" "Align parameters"
+    "C-c C-'" "Toggle quoting"
+    "C-c C-;" "Blank string"
+    "C-c C-j" "Jump to"
+    "C-c C-c" "dry-run"
+    "C-c C-v" "Validate syntax"
+    "C-c C-l" "Check semantic")
+#+END_SRC
+
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
