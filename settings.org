@@ -1,3 +1,5 @@
+#+LATEX_CLASS: article
+
 #+TITLE:  NobbZ-Emacs Configuration
 #+AUTHOR: Norbert Melzer
 #+EMAIL:  timmelzer@gmail.com
