@@ -3,30 +3,23 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-08-05 Fr 23:59 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>NobbZ-Emacs Configuration</title>
+<!-- 2016-08-06 Sa 18:05 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Norbert Melzer" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
+  .title  { text-align: center; }
   .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
+  .done   { color: green; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -65,14 +58,15 @@
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara { display: inline; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -140,28 +134,48 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/x-mathjax-config">
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "0em",
+        displayIndent: "2em",
 
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
              }
-});
+        }
+    });
+/*]]>*///-->
 </script>
-<script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -170,91 +184,91 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Foreword</a></li>
-<li><a href="#orgheadline2">2. Helpers</a></li>
-<li><a href="#orgheadline14">3. Packages</a>
+<li><a href="#sec-1">1. Foreword</a></li>
+<li><a href="#sec-2">2. Helpers</a></li>
+<li><a href="#sec-3">3. Packages</a>
 <ul>
-<li><a href="#orgheadline6">3.1. which-key</a>
+<li><a href="#sec-3-1">3.1. which-key</a>
 <ul>
-<li><a href="#orgheadline3">3.1.1. Install and load</a></li>
-<li><a href="#orgheadline4">3.1.2. Configuration</a></li>
-<li><a href="#orgheadline5">3.1.3. Key-chords</a></li>
+<li><a href="#sec-3-1-1">3.1.1. Install and load</a></li>
+<li><a href="#sec-3-1-2">3.1.2. Configuration</a></li>
+<li><a href="#sec-3-1-3">3.1.3. Key-chords</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">3.2. project-explorer</a>
+<li><a href="#sec-3-2">3.2. project-explorer</a>
 <ul>
-<li><a href="#orgheadline7">3.2.1. Install and load</a></li>
-<li><a href="#orgheadline8">3.2.2. Configuration</a></li>
-<li><a href="#orgheadline9">3.2.3. <span class="todo TODO">TODO</span> Key-chords</a></li>
+<li><a href="#sec-3-2-1">3.2.1. Install and load</a></li>
+<li><a href="#sec-3-2-2">3.2.2. Configuration</a></li>
+<li><a href="#sec-3-2-3">3.2.3. <span class="todo TODO">TODO</span> Key-chords</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline13">3.3. Puppet-Mode</a>
+<li><a href="#sec-3-3">3.3. Puppet-Mode</a>
 <ul>
-<li><a href="#orgheadline11">3.3.1. Install and load</a></li>
-<li><a href="#orgheadline12">3.3.2. Key-Chords</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgheadline15">4. <span class="todo TODO">TODO</span> Security</a></li>
-<li><a href="#orgheadline23">5. Appearance, UI Elements, and the Emacs server</a>
-<ul>
-<li><a href="#orgheadline16">5.1. The server</a></li>
-<li><a href="#orgheadline22">5.2. Appearance</a>
-<ul>
-<li><a href="#orgheadline17">5.2.1. Theme &amp; Faces</a></li>
-<li><a href="#orgheadline18">5.2.2. UI Elements</a></li>
-<li><a href="#orgheadline19">5.2.3. Welcome Screen</a></li>
-<li><a href="#orgheadline20">5.2.4. <span class="todo TODO">TODO</span> Window Geometry</a></li>
-<li><a href="#orgheadline21">5.2.5. <span class="todo TODO">TODO</span> Scrolling</a></li>
+<li><a href="#sec-3-3-1">3.3.1. Install and load</a></li>
+<li><a href="#sec-3-3-2">3.3.2. Key-Chords</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline24">6. Encoding</a></li>
-<li><a href="#orgheadline27">7. Pathes</a>
+<li><a href="#sec-4">4. <span class="todo TODO">TODO</span> Security</a></li>
+<li><a href="#sec-5">5. Appearance, UI Elements, and the Emacs server</a>
 <ul>
-<li><a href="#orgheadline25">7.1. Autosave and Backup</a></li>
-<li><a href="#orgheadline26">7.2. <span class="todo TODO">TODO</span> Dropbox</a></li>
+<li><a href="#sec-5-1">5.1. The server</a></li>
+<li><a href="#sec-5-2">5.2. Appearance</a>
+<ul>
+<li><a href="#sec-5-2-1">5.2.1. Theme &amp; Faces</a></li>
+<li><a href="#sec-5-2-2">5.2.2. UI Elements</a></li>
+<li><a href="#sec-5-2-3">5.2.3. Welcome Screen</a></li>
+<li><a href="#sec-5-2-4">5.2.4. <span class="todo TODO">TODO</span> Window Geometry</a></li>
+<li><a href="#sec-5-2-5">5.2.5. <span class="todo TODO">TODO</span> Scrolling</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline28">8. Window Movement</a></li>
-<li><a href="#orgheadline29">9. Debugging</a></li>
-<li><a href="#orgheadline31">10. Traiiling Whitespace</a>
-<ul>
-<li><a href="#orgheadline30">10.1. But do not display in some modes</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline33">11. <span class="todo TODO">TODO</span> Dired</a>
+<li><a href="#sec-6">6. Encoding</a></li>
+<li><a href="#sec-7">7. Pathes</a>
 <ul>
-<li><a href="#orgheadline32">11.1. General Settings</a></li>
+<li><a href="#sec-7-1">7.1. Autosave and Backup</a></li>
+<li><a href="#sec-7-2">7.2. <span class="todo TODO">TODO</span> Dropbox</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline46">12. Org-Mode</a>
+<li><a href="#sec-8">8. Window Movement</a></li>
+<li><a href="#sec-9">9. Debugging</a></li>
+<li><a href="#sec-10">10. Traiiling Whitespace</a>
 <ul>
-<li><a href="#orgheadline34">12.1. Installation</a></li>
-<li><a href="#orgheadline35">12.2. General settings</a></li>
-<li><a href="#orgheadline41">12.3. Allow execution of src-blocks</a>
-<ul>
-<li><a href="#orgheadline36">12.3.1. \LaTeX</a></li>
-<li><a href="#orgheadline37">12.3.2. Emacs-Lisp</a></li>
-<li><a href="#orgheadline38">12.3.3. Ditaa</a></li>
-<li><a href="#orgheadline39">12.3.4. Applying the stuff</a></li>
-<li><a href="#orgheadline40">12.3.5. Execution security</a></li>
+<li><a href="#sec-10-1">10.1. But do not display in some modes</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline42">12.4. Syntax-Highlighting in sourceblocks</a></li>
-<li><a href="#orgheadline43">12.5. HTML Export</a></li>
-<li><a href="#orgheadline44">12.6. PDF-Export</a></li>
-<li><a href="#orgheadline45">12.7. Agenda</a></li>
+<li><a href="#sec-11">11. <span class="todo TODO">TODO</span> Dired</a>
+<ul>
+<li><a href="#sec-11-1">11.1. General Settings</a></li>
+</ul>
+</li>
+<li><a href="#sec-12">12. Org-Mode</a>
+<ul>
+<li><a href="#sec-12-1">12.1. Installation</a></li>
+<li><a href="#sec-12-2">12.2. General settings</a></li>
+<li><a href="#sec-12-3">12.3. Allow execution of src-blocks</a>
+<ul>
+<li><a href="#sec-12-3-1">12.3.1. \LaTeX</a></li>
+<li><a href="#sec-12-3-2">12.3.2. Emacs-Lisp</a></li>
+<li><a href="#sec-12-3-3">12.3.3. Ditaa</a></li>
+<li><a href="#sec-12-3-4">12.3.4. Applying the stuff</a></li>
+<li><a href="#sec-12-3-5">12.3.5. Execution security</a></li>
+</ul>
+</li>
+<li><a href="#sec-12-4">12.4. Syntax-Highlighting in sourceblocks</a></li>
+<li><a href="#sec-12-5">12.5. HTML Export</a></li>
+<li><a href="#sec-12-6">12.6. PDF-Export</a></li>
+<li><a href="#sec-12-7">12.7. Agenda</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> Foreword</h2>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Foreword</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A properly rendered version of this document is available at the
@@ -262,8 +276,10 @@ following places:
 </p>
 
 <dl class="org-dl">
-<dt>PDF </dt><dd><a href="https://nobbz.github.io/emacs.d/settings.pdf">https://nobbz.github.io/emacs.d/settings.pdf</a></dd>
-<dt>HTML</dt><dd><a href="https://nobbz.github.io/emacs.d/settings.html">https://nobbz.github.io/emacs.d/settings.html</a></dd>
+<dt> PDF  </dt><dd><a href="https://nobbz.github.io/emacs.d/settings.pdf">https://nobbz.github.io/emacs.d/settings.pdf</a>
+</dd>
+<dt> HTML </dt><dd><a href="https://nobbz.github.io/emacs.d/settings.html">https://nobbz.github.io/emacs.d/settings.html</a>
+</dd>
 </dl>
 
 <p>
@@ -299,7 +315,8 @@ executed.
 
 <span style="font-style: italic;">;; </span><span style="font-style: italic;">Set the load path</span>
 (add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/lisp/"</span>)
-(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/lisp"</span>)
+(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/lisp"</span> t)
+(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/contrib/lisp"</span> t)
 
 <span style="font-style: italic;">;; </span><span style="font-style: italic;">Moved all the custom.el stuff into its own file called</span>
 <span style="font-style: italic;">;; </span><span style="font-style: italic;">=~/.emacs.d/customize.el=</span>
@@ -312,6 +329,9 @@ executed.
       (shell-command-to-string <span style="font-style: italic;">"hostname"</span>))))
 
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org</span>)
+
+(setq org-ditaa-jar-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/contrib/scripts/ditaa.jar"</span>)
+
 (<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">org-block-begin-line</span>
   '((t (<span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#99968b"</span> <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#303030"</span>)))
   <span style="font-style: italic;">"Face used for line delimiting the begin of source blocks."</span>)
@@ -326,19 +346,19 @@ executed.
 
 <p>
 The structure of the loading sequence as it is today can be seen in
-figure <a href="#orgparagraph1">1</a>, while the planned way to load can be found in
-figure <a href="#orgparagraph2">2</a>.
+figure <a href="#fig:current">1</a>, while the planned way to load can be found in
+figure <a href="#fig:planned">2</a>.
 </p>
 
 
-<div id="orgparagraph1" class="figure">
+<div id="fig:current" class="figure">
 <p><img src="structure.png" alt="structure.png" />
 </p>
 <p><span class="figure-number">Figure 1:</span> Current file loading structure</p>
 </div>
 
 
-<div id="orgparagraph2" class="figure">
+<div id="fig:planned" class="figure">
 <p><img src="structure-planned.png" alt="structure-planned.png" />
 </p>
 <p><span class="figure-number">Figure 2:</span> Planned file loading structure</p>
@@ -346,8 +366,8 @@ figure <a href="#orgparagraph2">2</a>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> Helpers</h2>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Helpers</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Small little helpers which make it easier to live-reload the config:
@@ -366,8 +386,8 @@ Small little helpers which make it easier to live-reload the config:
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">3</span> Packages</h2>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Packages</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
@@ -388,8 +408,8 @@ Small little helpers which make it easier to live-reload the config:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">3.1</span> which-key</h3>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> which-key</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 <code>which-key</code> provides a minor mode, that displays the key bindings
@@ -401,8 +421,8 @@ following your currently entered incomplete command in a pop up.
 </p>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">3.1.1</span> Install and load</h4>
+<div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Install and load</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 
@@ -415,8 +435,8 @@ following your currently entered incomplete command in a pop up.
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4"><span class="section-number-4">3.1.2</span> Configuration</h4>
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Configuration</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 1 second is a very long delay, I do think that about a tenth of a
@@ -431,8 +451,8 @@ second is enough.
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">3.1.3</span> Key-chords</h4>
+<div id="outline-container-sec-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Key-chords</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 <code>which-key</code> does not have any key-chords on its own, but I will enter
@@ -449,8 +469,8 @@ some global stuff here.
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">3.2</span> project-explorer</h3>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> project-explorer</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <code>project-explorer</code> is a tree explorer.
@@ -460,8 +480,8 @@ some global stuff here.
 <a href="https://github.com/sabof/project-explorer">https://github.com/sabof/project-explorer</a>
 </p>
 </div>
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">3.2.1</span> Install and load</h4>
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Install and load</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 We are only allowed to load <code>project-explorer</code> when in interactive mode.
@@ -477,21 +497,21 @@ We are only allowed to load <code>project-explorer</code> when in interactive mo
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="orgheadline8"><span class="section-number-4">3.2.2</span> Configuration</h4>
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Configuration</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 There is nothing special to configure right now.
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-4">
-<h4 id="orgheadline9"><span class="section-number-4">3.2.3</span> <span class="todo TODO">TODO</span> Key-chords</h4>
+<div id="outline-container-sec-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> <span class="todo TODO">TODO</span> Key-chords</h4>
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">3.3</span> Puppet-Mode</h3>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Puppet-Mode</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 <code>puppet-mode</code> does provide syntax-highlighting, alignemt and
@@ -503,8 +523,8 @@ navigation for puppet-code.
 </p>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11"><span class="section-number-4">3.3.1</span> Install and load</h4>
+<div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Install and load</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 
@@ -526,8 +546,8 @@ Also we want to open <code>Puppetfile=s in =ruby-mode</code>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12"><span class="section-number-4">3.3.2</span> Key-Chords</h4>
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Key-Chords</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <div class="org-src-container">
 
@@ -546,11 +566,11 @@ Also we want to open <code>Puppetfile=s in =ruby-mode</code>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Security</h2>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Security</h2>
 </div>
-<div id="outline-container-orgheadline23" class="outline-2">
-<h2 id="orgheadline23"><span class="section-number-2">5</span> Appearance, UI Elements, and the Emacs server</h2>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Appearance, UI Elements, and the Emacs server</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 First start a server and then set some important appearance
@@ -558,8 +578,8 @@ settings. Note that some of the settings are in <a href="init.el"><code>init.el<
 </p>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">5.1</span> The server</h3>
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> The server</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Start the server if not already running.
@@ -589,11 +609,11 @@ client using <code>C-x k</code>, the way it seems natural.
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">5.2</span> Appearance</h3>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Appearance</h3>
 <div class="outline-text-3" id="text-5-2">
-</div><div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">5.2.1</span> Theme &amp; Faces</h4>
+</div><div id="outline-container-sec-5-2-1" class="outline-4">
+<h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> Theme &amp; Faces</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <div class="org-src-container">
 
@@ -616,41 +636,41 @@ We want to use <code>FiraCode</code> if possible by any means.
 
 <pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (window-system)
   (set-default-font <span style="font-style: italic;">"Fira Code"</span>))
-(<span style="font-weight: bold;">let</span> ((alist '((33 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">==</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">!!</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[!=]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (35 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">##</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">_(</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[#(?[_{]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (36 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (37 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">%%</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">%</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (38 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">&amp;&amp;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&amp;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (42 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">\\*\\*/</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">\\*[*/]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[*/&gt;]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (43 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">\\+\\+</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[+&gt;]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (45 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">-[&gt;-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&lt;&lt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&gt;&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[&lt;&gt;}~-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (46 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">\\.[.&lt;]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[.=-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (47 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">\\*\\*</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">//</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">==</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[*/=&gt;]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (48 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">x[a-zA-Z]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (58 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">::</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[:=]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (59 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">;;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (60 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">!--</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">~~</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">-&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">\\$&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">\\*&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">\\+&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">--</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&lt;[&lt;=-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">=[&lt;=&gt;]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">|&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[*$+~/&lt;=&gt;|-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (61 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">/=</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">:=</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&lt;&lt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">=[=&gt;]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&gt;&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[&lt;=&gt;~]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (62 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">=&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">&gt;[=&gt;-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[=&gt;-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (63 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">\\?\\?</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[:=?]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (91 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (92 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">\\\\\\\\</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">\\\\</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (94 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">=</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (119 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">ww</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (123 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">-</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (124 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">|[=|]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[=&gt;|]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>)
-               (126 . <span style="font-style: italic;">".</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(?:</span><span style="font-style: italic;">~&gt;</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">~~</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">|</span><span style="font-style: italic;">[&gt;=@~-]</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">"</span>))))
-  (<span style="font-weight: bold;">dolist</span> (char-regexp alist)
-    (set-char-table-range composition-function-table
-                          (car char-regexp)
-                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
+<span style="font-style: italic;">;; </span><span style="font-style: italic;">(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(36 . ".\\(?:&gt;\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(37 . ".\\(?:\\(?:%%\\)\\|%\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(38 . ".\\(?:\\(?:&amp;&amp;\\)\\|&amp;\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/&gt;]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(43 . ".\\(?:\\(?:\\+\\+\\)\\|[+&gt;]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(45 . ".\\(?:\\(?:-[&gt;-]\\|&lt;&lt;\\|&gt;&gt;\\)\\|[&lt;&gt;}~-]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(46 . ".\\(?:\\(?:\\.[.&lt;]\\)\\|[.=-]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=&gt;]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(48 . ".\\(?:x[a-zA-Z]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(58 . ".\\(?:::\\|[:=]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(59 . ".\\(?:;;\\|;\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|-&gt;\\|\\$&gt;\\|\\*&gt;\\|\\+&gt;\\|--\\|&lt;[&lt;=-]\\|=[&lt;=&gt;]\\||&gt;\\)\\|[*$+~/&lt;=&gt;|-]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(61 . ".\\(?:\\(?:/=\\|:=\\|&lt;&lt;\\|=[=&gt;]\\|&gt;&gt;\\)\\|[&lt;=&gt;~]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(62 . ".\\(?:\\(?:=&gt;\\|&gt;[=&gt;-]\\)\\|[=&gt;-]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(91 . ".\\(?:]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(94 . ".\\(?:=\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(119 . ".\\(?:ww\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(123 . ".\\(?:-\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(124 . ".\\(?:\\(?:|[=|]\\)\\|[=&gt;|]\\)")</span>
+<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(126 . ".\\(?:~&gt;\\|~~\\|[&gt;=@~-]\\)"))))</span>
+<span style="font-style: italic;">;;   </span><span style="font-style: italic;">(dolist (char-regexp alist)</span>
+<span style="font-style: italic;">;;     </span><span style="font-style: italic;">(set-char-table-range composition-function-table</span>
+<span style="font-style: italic;">;;                           </span><span style="font-style: italic;">(car char-regexp)</span>
+<span style="font-style: italic;">;;                           </span><span style="font-style: italic;">`([,(cdr char-regexp) 0 font-shape-gstring]))))</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18"><span class="section-number-4">5.2.2</span> UI Elements</h4>
+<div id="outline-container-sec-5-2-2" class="outline-4">
+<h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> UI Elements</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 Get rid of that ugly disturbing stuff no one needs…
@@ -667,8 +687,8 @@ Get rid of that ugly disturbing stuff no one needs…
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-4">
-<h4 id="orgheadline19"><span class="section-number-4">5.2.3</span> Welcome Screen</h4>
+<div id="outline-container-sec-5-2-3" class="outline-4">
+<h4 id="sec-5-2-3"><span class="section-number-4">5.2.3</span> Welcome Screen</h4>
 <div class="outline-text-4" id="text-5-2-3">
 <p>
 We also want to get rid of the splash screen and start into home
@@ -685,12 +705,12 @@ directory.
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-4">
-<h4 id="orgheadline20"><span class="section-number-4">5.2.4</span> <span class="todo TODO">TODO</span> Window Geometry</h4>
+<div id="outline-container-sec-5-2-4" class="outline-4">
+<h4 id="sec-5-2-4"><span class="section-number-4">5.2.4</span> <span class="todo TODO">TODO</span> Window Geometry</h4>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-4">
-<h4 id="orgheadline21"><span class="section-number-4">5.2.5</span> <span class="todo TODO">TODO</span> Scrolling</h4>
+<div id="outline-container-sec-5-2-5" class="outline-4">
+<h4 id="sec-5-2-5"><span class="section-number-4">5.2.5</span> <span class="todo TODO">TODO</span> Scrolling</h4>
 <div class="outline-text-4" id="text-5-2-5">
 <p>
 I need to find out how to let emacs behave as with <code>spacemacs</code>
@@ -706,8 +726,8 @@ I need to find out how to let emacs behave as with <code>spacemacs</code>
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-2">
-<h2 id="orgheadline24"><span class="section-number-2">6</span> Encoding</h2>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Encoding</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Most of the time I want to have <code>UTF-8</code> as my file encoding.
@@ -721,11 +741,11 @@ Most of the time I want to have <code>UTF-8</code> as my file encoding.
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27"><span class="section-number-2">7</span> Pathes</h2>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Pathes</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25"><span class="section-number-3">7.1</span> Autosave and Backup</h3>
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Autosave and Backup</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Autosaves directly beneath the edited files do clutter up the
@@ -747,8 +767,8 @@ sourcetree. Instead let's throw them inside <code>~/tmp/</code>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">7.2</span> <span class="todo TODO">TODO</span> Dropbox</h3>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> <span class="todo TODO">TODO</span> Dropbox</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 We need to know the basepath of dropbox.
@@ -776,8 +796,8 @@ ugly and needs some care to make it more beautiful.
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-2">
-<h2 id="orgheadline28"><span class="section-number-2">8</span> Window Movement</h2>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Window Movement</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Use Shift-&lt;Arrow&gt; to navigate through windows.
@@ -795,8 +815,8 @@ Use Shift-&lt;Arrow&gt; to navigate through windows.
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-2">
-<h2 id="orgheadline29"><span class="section-number-2">9</span> Debugging</h2>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Debugging</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Setup some keys to make it easier to use GUD.
@@ -813,8 +833,8 @@ Setup some keys to make it easier to use GUD.
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-2">
-<h2 id="orgheadline31"><span class="section-number-2">10</span> Traiiling Whitespace</h2>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Traiiling Whitespace</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 We want to see trailing whitespace, since it is the devil.
@@ -828,8 +848,8 @@ We want to see trailing whitespace, since it is the devil.
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">10.1</span> But do not display in some modes</h3>
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> But do not display in some modes</h3>
 <div class="outline-text-3" id="text-10-1">
 <div class="org-src-container">
 
@@ -855,11 +875,11 @@ Add a line for each mode:
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline33" class="outline-2">
-<h2 id="orgheadline33"><span class="section-number-2">11</span> <span class="todo TODO">TODO</span> Dired</h2>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> <span class="todo TODO">TODO</span> Dired</h2>
 <div class="outline-text-2" id="text-11">
-</div><div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">11.1</span> General Settings</h3>
+</div><div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1"><span class="section-number-3">11.1</span> General Settings</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 The dirst two lines stop dired from asking me if I really want to
@@ -883,16 +903,16 @@ other buffers location as target when copying in split-screen mode.
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline46" class="outline-2">
-<h2 id="orgheadline46"><span class="section-number-2">12</span> Org-Mode</h2>
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Org-Mode</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 <a href="http://orgmode.org/">org-mode</a> might be THE killer app for emacs.
 </p>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-3">
-<h3 id="orgheadline34"><span class="section-number-3">12.1</span> Installation</h3>
+<div id="outline-container-sec-12-1" class="outline-3">
+<h3 id="sec-12-1"><span class="section-number-3">12.1</span> Installation</h3>
 <div class="outline-text-3" id="text-12-1">
 <div class="org-src-container">
 
@@ -905,8 +925,8 @@ other buffers location as target when copying in split-screen mode.
 </div>
 </div>
 
-<div id="outline-container-orgheadline35" class="outline-3">
-<h3 id="orgheadline35"><span class="section-number-3">12.2</span> General settings</h3>
+<div id="outline-container-sec-12-2" class="outline-3">
+<h3 id="sec-12-2"><span class="section-number-3">12.2</span> General settings</h3>
 <div class="outline-text-3" id="text-12-2">
 <p>
 Some general settings for org.
@@ -925,8 +945,8 @@ Some general settings for org.
 </div>
 </div>
 
-<div id="outline-container-orgheadline41" class="outline-3">
-<h3 id="orgheadline41"><span class="section-number-3">12.3</span> Allow execution of src-blocks</h3>
+<div id="outline-container-sec-12-3" class="outline-3">
+<h3 id="sec-12-3"><span class="section-number-3">12.3</span> Allow execution of src-blocks</h3>
 <div class="outline-text-3" id="text-12-3">
 <p>
 First we need an empty list
@@ -939,8 +959,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline36" class="outline-4">
-<h4 id="orgheadline36"><span class="section-number-4">12.3.1</span> \LaTeX</h4>
+<div id="outline-container-sec-12-3-1" class="outline-4">
+<h4 id="sec-12-3-1"><span class="section-number-4">12.3.1</span> \LaTeX</h4>
 <div class="outline-text-4" id="text-12-3-1">
 <div class="org-src-container">
 
@@ -951,8 +971,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline37" class="outline-4">
-<h4 id="orgheadline37"><span class="section-number-4">12.3.2</span> Emacs-Lisp</h4>
+<div id="outline-container-sec-12-3-2" class="outline-4">
+<h4 id="sec-12-3-2"><span class="section-number-4">12.3.2</span> Emacs-Lisp</h4>
 <div class="outline-text-4" id="text-12-3-2">
 <div class="org-src-container">
 
@@ -962,8 +982,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline38" class="outline-4">
-<h4 id="orgheadline38"><span class="section-number-4">12.3.3</span> Ditaa</h4>
+<div id="outline-container-sec-12-3-3" class="outline-4">
+<h4 id="sec-12-3-3"><span class="section-number-4">12.3.3</span> Ditaa</h4>
 <div class="outline-text-4" id="text-12-3-3">
 <div class="org-src-container">
 
@@ -973,8 +993,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline39" class="outline-4">
-<h4 id="orgheadline39"><span class="section-number-4">12.3.4</span> Applying the stuff</h4>
+<div id="outline-container-sec-12-3-4" class="outline-4">
+<h4 id="sec-12-3-4"><span class="section-number-4">12.3.4</span> Applying the stuff</h4>
 <div class="outline-text-4" id="text-12-3-4">
 <div class="org-src-container">
 
@@ -992,8 +1012,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline40" class="outline-4">
-<h4 id="orgheadline40"><span class="section-number-4">12.3.5</span> Execution security</h4>
+<div id="outline-container-sec-12-3-5" class="outline-4">
+<h4 id="sec-12-3-5"><span class="section-number-4">12.3.5</span> Execution security</h4>
 <div class="outline-text-4" id="text-12-3-5">
 <div class="org-src-container">
 
@@ -1006,8 +1026,8 @@ First we need an empty list
 </div>
 </div>
 
-<div id="outline-container-orgheadline42" class="outline-3">
-<h3 id="orgheadline42"><span class="section-number-3">12.4</span> Syntax-Highlighting in sourceblocks</h3>
+<div id="outline-container-sec-12-4" class="outline-3">
+<h3 id="sec-12-4"><span class="section-number-3">12.4</span> Syntax-Highlighting in sourceblocks</h3>
 <div class="outline-text-3" id="text-12-4">
 <p>
 This is a very important feature in an org-document. Also adds native
@@ -1024,8 +1044,8 @@ This is a very important feature in an org-document. Also adds native
 </div>
 </div>
 
-<div id="outline-container-orgheadline43" class="outline-3">
-<h3 id="orgheadline43"><span class="section-number-3">12.5</span> HTML Export</h3>
+<div id="outline-container-sec-12-5" class="outline-3">
+<h3 id="sec-12-5"><span class="section-number-3">12.5</span> HTML Export</h3>
 <div class="outline-text-3" id="text-12-5">
 <p>
 There shall be a custom stylesheet for HTML export.
@@ -1040,8 +1060,8 @@ There shall be a custom stylesheet for HTML export.
 </div>
 </div>
 
-<div id="outline-container-orgheadline44" class="outline-3">
-<h3 id="orgheadline44"><span class="section-number-3">12.6</span> PDF-Export</h3>
+<div id="outline-container-sec-12-6" class="outline-3">
+<h3 id="sec-12-6"><span class="section-number-3">12.6</span> PDF-Export</h3>
 <div class="outline-text-3" id="text-12-6">
 <p>
 Use minted as a highlighter.
@@ -1069,8 +1089,8 @@ the engine.
 </div>
 </div>
 
-<div id="outline-container-orgheadline45" class="outline-3">
-<h3 id="orgheadline45"><span class="section-number-3">12.7</span> Agenda</h3>
+<div id="outline-container-sec-12-7" class="outline-3">
+<h3 id="sec-12-7"><span class="section-number-3">12.7</span> Agenda</h3>
 <div class="outline-text-3" id="text-12-7">
 <p>
 We want to have this file itself on our agenda.
@@ -1089,7 +1109,8 @@ We want to have this file itself on our agenda.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Norbert Melzer</p>
-<p class="date">Created: 2016-08-05 Fr 23:59</p>
+<p class="date">Created: 2016-08-06 Sa 18:05</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
