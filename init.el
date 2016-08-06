@@ -19,7 +19,8 @@
 
 ;; Set the load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/vendor/org/lisp")
+(add-to-list 'load-path "~/.emacs.d/vendor/org/lisp" t)
+(add-to-list 'load-path "~/.emacs.d/vendor/org/contrib/lisp" t)
 
 ;; Moved all the custom.el stuff into its own file called
 ;; =~/.emacs.d/customize.el=
