@@ -33,6 +33,9 @@
       (shell-command-to-string "hostname"))))
 
 (require 'org)
+
+(setq org-ditaa-jar-path "~/.emacs.d/vendor/org/contrib/scripts/ditaa.jar")
+
 (defface org-block-begin-line
   '((t (:foreground "#99968b" :background "#303030")))
   "Face used for line delimiting the begin of source blocks.")
