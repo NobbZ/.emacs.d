@@ -181,7 +181,18 @@ work in our projects.
     "C-c C-v" "Validate syntax"
     "C-c C-l" "Check semantic")
 #+END_SRC
+** haskell-mode
 
+=haskell-mode= does provide syntax-highlighting, alignment and
+navigation for haskell source code.
+
+[[http://haskell.github.io/haskell-mode/]]
+
+*** Install and load
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'haskell-mode)
+    (package-install 'haskell-mode))
+#+END_SRC
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
