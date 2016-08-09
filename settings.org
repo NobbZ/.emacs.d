@@ -522,3 +522,15 @@ We want to have this file itself on our agenda.
   (add-to-list 'org-agenda-files (concat dropbox-base-path "/Dokumente/org/TODO.org"))
   (add-to-list 'org-agenda-files "~/.emacs.d/settings.org")
 #+END_SRC
+
+Also, we do need to have some additional convinience functions which
+help to find the various agenda related files.
+
+#+BEGIN_SRC emacs-lisp
+  (defun open-todo ()
+    (interactive)
+    (find-file (concat dropbox-base-path "/Dokumente/org/TODO.org")))
+  (defun open-timing ()
+    (interactive)
+    (find-file (concat dropbox-base-path "/Dokumente/org/time-sheet.org")))
+#+END_SRC
