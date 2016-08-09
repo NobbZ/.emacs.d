@@ -159,6 +159,16 @@ Also we want to open =Puppetfile=s in =ruby-mode=.
    'auto-mode-alist '("\\`Puppetfile\\'" . ruby-mode))
 #+END_SRC
 
+*** Configuration
+
+We need to alter the =puppet-lint-command= a bit to have it actually
+work in our projects.
+
+#+BEGIN_SRC emacs-lisp
+  (setq puppet-lint-command "puppet-lint --no-autoloader_layout-check --with-context --log-format \"%{path}:%{line}: %{kind}: %{message} (%{check})\"")
+#+END_SRC
+
+
 *** Key-Chords
 
 #+BEGIN_SRC emacs-lisp
