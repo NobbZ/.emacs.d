@@ -120,6 +120,24 @@ some global stuff here.
     "C-x C-f" "Open file"
     "C-x C-s" "Save file")
 #+END_SRC
+** company-mode
+
+=company-mode= is a text completion framework for Emacs.
+
+[[http://company-mode.github.io/]]
+
+*** Install and load
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'company)
+    (package-install 'company))
+  (require 'company)
+  (add-hook 'after-init-hook 'global-company-mode)
+#+END_SRC
+
+*** TODO Configuration
+*** TODO Key-chords
+
 ** project-explorer
 =project-explorer= is a tree explorer.
 
