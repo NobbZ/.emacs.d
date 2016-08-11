@@ -156,6 +156,20 @@ We are only allowed to load =project-explorer= when in interactive mode.
 There is nothing special to configure right now.
 *** TODO Key-chords
 
+Toggle the explorer.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c p e") 'project-explorer-toggle)
+#+END_SRC
+
+Also we do need to update the descriptions in =which-key=s dialog.
+
+#+BEGIN_SRC emacs-lisp
+  (which-key-add-key-based-replacements
+    "C-c p"   "Project-Explorer"
+    "C-c p e" "Toggle PE")
+#+END_SRC
+
 ** Puppet-Mode
 
 =puppet-mode= does provide syntax-highlighting, alignemt and
