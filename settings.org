@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #+LATEX_CLASS: article
 
 #+TITLE:  NobbZ-Emacs Configuration
@@ -348,7 +349,7 @@ We want to use =FiraCode= if possible by any means.
 
 *** UI Elements
 
-Get rid of that ugly disturbing stuff no one needs…
+Get rid of that ugly disturbing stuff no one needsâ€¦
 
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
