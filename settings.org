@@ -239,6 +239,37 @@ this settings-file.
   (require 'lfe-start)
 #+END_SRC
 
+** alchemist
+
+Elixir Tooling Integration Into Emacs.
+
+[[https://github.com/tonini/alchemist.el]]
+
+**ATTENTION:** We do need to make sure, that nothing in this section
+is done, when we do not have =emacs= 24.4 or later!
+
+*** Install and load
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'aclhemist)
+    (package-install 'alchemist))
+#+END_SRC
+
+*** TODO Configuration
+
+*** TODO Keybindings
+
+Currently all keybindings used by =alchemist= do violate emacs
+keybinding conventions.
+
+A bug has been reported:
+https://github.com/tonini/alchemist.el/issues/246
+
+And in the meantime it was closed (by me) in favor of the older
+https://github.com/tonini/alchemist.el/issues/229. 
+
+Until it got fixed, I won't configure any further key-bindings.
+
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
