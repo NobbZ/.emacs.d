@@ -7,10 +7,13 @@ HTMLS := $(ORG_FILES:%.org=_pages/%.html)
 PNGS  := $(PNG_FILES:%=_pages/%)
 
 pages: $(PDFS) $(HTMLS) $(PNGS)
-	cd _pages; git add $(^:_pages/%=%); git commit -m $(shell date +\"%Y-%M-%dT%T\"); git push
+	cd _pages; git add $(^:_pages/%=%); git commit -m $(shell date +\"%Y-%M-%dT%T\"); git pull --rebase; git push
 	git push
 
-_pages/%: %
+_pages:
+	git clone git@github.com:NobbZ/emacs.d _pages; cd _pages; git checkout gh-pages
+
+_pages/%: % | _pages
 	cp $< $@
 
 %.pdf: %.org
