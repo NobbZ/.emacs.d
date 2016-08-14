@@ -225,6 +225,20 @@ navigation for haskell source code.
   (unless (package-installed-p 'haskell-mode)
     (package-install 'haskell-mode))
 #+END_SRC
+** lfe-mode
+
+=lfe-mode= is used to highlight and complete [[http://lfe.io/][lfe]]-files. It is
+currently not available at any repository, so it is delivered with
+this settings-file.
+
+*** Install and load
+
+#+BEGIN_SRC emacs-lisp
+  (defvar lfe-mode-dir "~/.emacs.d/vendor/lfe")
+  (add-to-list 'load-path lfe-mode-dir)
+  (require 'lfe-start)
+#+END_SRC
+
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
@@ -395,7 +409,6 @@ Use Shift-<Arrow> to navigate through windows.
   (windmove-default-keybindings)
   (setq framemove-hook-into-windmove t)
 #+END_SRC
-
 * Debugging
 
 Setup some keys to make it easier to use GUD.
