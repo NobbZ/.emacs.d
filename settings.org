@@ -252,7 +252,7 @@ is done, when we do not have =emacs= 24.4 or later!
 *** Install and load
 
 #+BEGIN_SRC emacs-lisp
-  (unless (package-installed-p 'aclhemist)
+  (unless (package-installed-p 'alchemist)
     (package-install 'alchemist))
 #+END_SRC
 
