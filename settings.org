@@ -121,6 +121,43 @@ some global stuff here.
     "C-x C-f" "Open file"
     "C-x C-s" "Save file")
 #+END_SRC
+** helm
+
+=helm= is an emacs framework for incremental completions and narrowing
+selections. It helps to rapidly complete file names, buffer names, or
+any other emacs interactions requiring selecting an item from a list
+of possible choices.
+
+*** Innstall and load
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'helm)
+    (package-install 'helm))
+  (require 'helm-config)
+  (require 'helm)
+#+END_SRC
+
+*** TODO Configuration
+
+**** Size
+
+Per default the helm-buffer takes quite a large portion of the screen
+estate, therefore we reduce the size and make it resize automatically
+as the amount of matches narrows down.
+
+#+BEGIN_SRC emacs-lisp
+  (helm-autoresize-mode)
+  (setq helm-autoresize-max-height 33) ; take 33% of the screen at most
+  (setq helm-autoresize-min-height  1) ; get as small as necessary
+#+END_SRC
+
+*** TODO Keybindings
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-x")     'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+#+END_SRC
+
 ** company-mode
 
 =company-mode= is a text completion framework for Emacs.
