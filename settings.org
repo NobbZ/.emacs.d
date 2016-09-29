@@ -78,6 +78,8 @@ Small little helpers which make it easier to live-reload the config:
 ;;  (unless package-archive-contents
 ;;    (package-refresh-contents))
 
+  (package-refresh-contents)
+
   (dolist (package package-list)
     (unless (package-installed-p package)
       (package-install package)))
