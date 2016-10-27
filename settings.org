@@ -491,13 +491,15 @@ Setup some keys to make it easier to use GUD.
   (global-set-key (kbd "<f8>") 'gud-finish)
 #+END_SRC
 
-* Traiiling Whitespace
+* Whitespace
 
 We want to see trailing whitespace, since it is the devil.
 
 #+BEGIN_SRC emacs-lisp
   (require 'whitespace)
   (setq-default show-trailing-whitespace t)
+  (global-whitespace-mode)
+  (setq-default indent-tabs-mode nil)
 #+END_SRC
 
 ** But do not display in some modes
