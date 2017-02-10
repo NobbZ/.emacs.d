@@ -310,6 +310,23 @@ https://github.com/tonini/alchemist.el/issues/229.
 
 Until it got fixed, I won't configure any further key-bindings.
 
+** go-mode
+
+This is ~go-mode~, the Emacs mode for editing Go code.
+
+*** Install and load
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'go-mode)
+    (package-install 'go-mode))
+
+  (require 'company-go) ;; perhaps as an hook for go-mode?
+#+END_SRC
+
+*** TODO Configuration
+
+*** TODO Keybindings
+
 * TODO Security
 * Appearance, UI Elements, and the Emacs server
 
