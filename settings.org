@@ -274,9 +274,11 @@ this settings-file.
 *** Install and load
 
 #+BEGIN_SRC emacs-lisp
-  (defvar lfe-mode-dir "~/.emacs.d/vendor/lfe")
-  (add-to-list 'load-path lfe-mode-dir)
-  (require 'lfe-start)
+  ; (defvar lfe-mode-dir "~/.emacs.d/vendor/lfe")
+  ; (add-to-list 'load-path lfe-mode-dir)
+  (unless (package-installed-p 'lfe-mode)
+    (package-install 'lfe-mode))
+  ; (require 'lfe-start)
 #+END_SRC
 
 ** alchemist
