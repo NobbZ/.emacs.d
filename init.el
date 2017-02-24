@@ -10,8 +10,9 @@
   (setq package-pinned-packages
         '((org . "org"))))
 (package-initialize)
+(package-refresh-contents)
+
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
 
 (eval-when-compile
