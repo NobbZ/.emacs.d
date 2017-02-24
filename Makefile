@@ -19,10 +19,10 @@ _pages/%: % | _pages
 	cp $< $@
 
 %.pdf: %.org
-	emacs --batch -l ~/.emacs.d/init.el $< -f org-latex-export-to-pdf --kill
+	emacs --batch -l ./init.el $< -f org-latex-export-to-pdf --kill
 
 %.html: %.org
-	emacs --batch -l ~/.emacs.d/init.el $< -f org-html-export-to-html --kill
+	emacs --batch -l ./init.el $< -f org-html-export-to-html --kill
 
 clean:
 	rm -rfv *.html
