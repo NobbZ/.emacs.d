@@ -29,3 +29,5 @@ clean:
 	rm -rfv *.pdf
 	rm -rfv *.tex
 	rm -rfv *.png
+	rm -rfv *.fdb_latexmk
+	rm -rfv *.fls
