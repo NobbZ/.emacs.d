@@ -31,3 +31,5 @@ clean:
 	rm -rfv *.png
 	rm -rfv *.fdb_latexmk
 	rm -rfv *.fls
+	rm -rfv *.pyg
+
