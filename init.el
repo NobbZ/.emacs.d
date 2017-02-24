@@ -19,13 +19,14 @@
   (require 'use-package))
 
 ;; Set the load path
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/vendor/org/lisp" t)
-(add-to-list 'load-path "~/.emacs.d/vendor/org/contrib/lisp" t)
+(setq dot-emacs-d-basedir (file-name-directory load-file-name))
+(add-to-list 'load-path (concat dot-emacs-d-basedir "lisp/"))
+(add-to-list 'load-path (concat dot-emacs-d-basedir "vendor/org/lisp") t)
+(add-to-list 'load-path (concat dot-emacs-d-basedir "vendor/org/contrib/lisp") t)
 
 ;; Moved all the custom.el stuff into its own file called
 ;; =~/.emacs.d/customize.el=
-(setq custom-file "~/.emacs.d/customize.el")
+(setq custom-file (concat dot-emacs-d-basedir "customize.el"))
 (load custom-file)
 
 (setq hostname
@@ -35,7 +36,7 @@
 
 (require 'org)
 
-(setq org-ditaa-jar-path "~/.emacs.d/vendor/org/contrib/scripts/ditaa.jar")
+(setq org-ditaa-jar-path (concat dot-emacs-d-basedir "vendor/org/contrib/scripts/ditaa.jar"))
 
 (defface org-block-begin-line
   '((t (:foreground "#99968b" :background "#303030")))
@@ -45,4 +46,4 @@
   '((t (:foreground "#99968b" :background "#303030")))
   "Face used for line delimiting the end of source blocks.")
 
-(org-babel-load-file "~/.emacs.d/settings.org")
+(org-babel-load-file (concat dot-emacs-d-basedir "settings.org"))
