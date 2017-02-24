@@ -309,7 +309,7 @@ A bug has been reported:
 https://github.com/tonini/alchemist.el/issues/246
 
 And in the meantime it was closed (by me) in favor of the older
-https://github.com/tonini/alchemist.el/issues/229. 
+https://github.com/tonini/alchemist.el/issues/229.
 
 Until it got fixed, I won't configure any further key-bindings.
 
@@ -322,6 +322,9 @@ This is ~go-mode~, the Emacs mode for editing Go code.
 #+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'go-mode)
     (package-install 'go-mode))
+
+  (unless (package-installed-p 'company-go)
+    (package-install 'company-go))
 
   (require 'company-go) ;; perhaps as an hook for go-mode?
 #+END_SRC
