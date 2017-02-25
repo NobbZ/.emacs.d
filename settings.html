@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>NobbZ-Emacs Configuration</title>
-<!-- 2016-08-06 Sa 20:16 -->
+<!-- 2017-02-25 Sa 10:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Norbert Melzer" />
@@ -195,17 +195,56 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3-1-3">3.1.3. Key-chords</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-2">3.2. project-explorer</a>
+<li><a href="#sec-3-2">3.2. helm</a>
 <ul>
-<li><a href="#sec-3-2-1">3.2.1. Install and load</a></li>
-<li><a href="#sec-3-2-2">3.2.2. Configuration</a></li>
-<li><a href="#sec-3-2-3">3.2.3. <span class="todo TODO">TODO</span> Key-chords</a></li>
+<li><a href="#sec-3-2-1">3.2.1. Innstall and load</a></li>
+<li><a href="#sec-3-2-2">3.2.2. <span class="todo TODO">TODO</span> Configuration</a></li>
+<li><a href="#sec-3-2-3">3.2.3. <span class="todo TODO">TODO</span> Keybindings</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-3">3.3. Puppet-Mode</a>
+<li><a href="#sec-3-3">3.3. company-mode</a>
 <ul>
 <li><a href="#sec-3-3-1">3.3.1. Install and load</a></li>
-<li><a href="#sec-3-3-2">3.3.2. Key-Chords</a></li>
+<li><a href="#sec-3-3-2">3.3.2. <span class="todo TODO">TODO</span> Configuration</a></li>
+<li><a href="#sec-3-3-3">3.3.3. <span class="todo TODO">TODO</span> Key-chords</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-4">3.4. project-explorer</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1. Install and load</a></li>
+<li><a href="#sec-3-4-2">3.4.2. Configuration</a></li>
+<li><a href="#sec-3-4-3">3.4.3. <span class="todo TODO">TODO</span> Key-chords</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-5">3.5. Puppet-Mode</a>
+<ul>
+<li><a href="#sec-3-5-1">3.5.1. Install and load</a></li>
+<li><a href="#sec-3-5-2">3.5.2. Configuration</a></li>
+<li><a href="#sec-3-5-3">3.5.3. Key-Chords</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-6">3.6. haskell-mode</a>
+<ul>
+<li><a href="#sec-3-6-1">3.6.1. Install and load</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-7">3.7. lfe-mode</a>
+<ul>
+<li><a href="#sec-3-7-1">3.7.1. Install and load</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-8">3.8. alchemist</a>
+<ul>
+<li><a href="#sec-3-8-1">3.8.1. Install and load</a></li>
+<li><a href="#sec-3-8-2">3.8.2. <span class="todo TODO">TODO</span> Configuration</a></li>
+<li><a href="#sec-3-8-3">3.8.3. <span class="todo TODO">TODO</span> Keybindings</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-9">3.9. go-mode</a>
+<ul>
+<li><a href="#sec-3-9-1">3.9.1. Install and load</a></li>
+<li><a href="#sec-3-9-2">3.9.2. <span class="todo TODO">TODO</span> Configuration</a></li>
+<li><a href="#sec-3-9-3">3.9.3. <span class="todo TODO">TODO</span> Keybindings</a></li>
 </ul>
 </li>
 </ul>
@@ -234,7 +273,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-8">8. Window Movement</a></li>
 <li><a href="#sec-9">9. Debugging</a></li>
-<li><a href="#sec-10">10. Traiiling Whitespace</a>
+<li><a href="#sec-10">10. Whitespace</a>
 <ul>
 <li><a href="#sec-10-1">10.1. But do not display in some modes</a></li>
 </ul>
@@ -294,53 +333,79 @@ executed.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="font-style: italic;">;; </span><span style="font-style: italic;">NobbZ init.el</span>
-<span style="font-style: italic;">;; </span><span style="font-style: italic;">Real stuff happens in =settings.org=</span>
+<pre class="src src-emacs-lisp">;; NobbZ init.el
+;; Real stuff happens in =settings.org=
 
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">package</span>)
+(require 'package)
 (setq package-archives
-      '((<span style="font-style: italic;">"gnu"</span>   . <span style="font-style: italic;">"http://elpa.gnu.org/packages/"</span>)
-        (<span style="font-style: italic;">"melpa"</span> . <span style="font-style: italic;">"http://melpa.org/packages/"</span>)
-        (<span style="font-style: italic;">"org"</span>   . <span style="font-style: italic;">"http://orgmode.org/elpa/"</span>)))
-(<span style="font-weight: bold;">when</span> (boundp 'package-pinned-packages)
+      '(("gnu"   . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")
+        ("org"   . "http://orgmode.org/elpa/")))
+(when (boundp 'package-pinned-packages)
   (setq package-pinned-packages
-        '((org . <span style="font-style: italic;">"org"</span>))))
+        '((org . "org"))))
 (package-initialize)
-(<span style="font-weight: bold;">unless</span> (package-installed-p 'use-package)
-  (package-refresh-contents)
+(package-refresh-contents)
+
+(unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
-(<span style="font-weight: bold;">eval-when-compile</span>
-  (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">use-package</span>))
+(eval-when-compile
+  (require 'use-package))
 
-<span style="font-style: italic;">;; </span><span style="font-style: italic;">Set the load path</span>
-(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/lisp/"</span>)
-(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/lisp"</span> t)
-(add-to-list 'load-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/contrib/lisp"</span> t)
+;; Set the load path
+(setq dot-emacs-d-basedir (file-name-directory load-file-name))
+(add-to-list 'load-path (concat dot-emacs-d-basedir "lisp/"))
+(add-to-list 'load-path (concat dot-emacs-d-basedir "vendor/org/lisp") t)
+(add-to-list 'load-path (concat dot-emacs-d-basedir "vendor/org/contrib/lisp") t)
 
-<span style="font-style: italic;">;; </span><span style="font-style: italic;">Moved all the custom.el stuff into its own file called</span>
-<span style="font-style: italic;">;; </span><span style="font-style: italic;">=~/.emacs.d/customize.el=</span>
-(setq custom-file <span style="font-style: italic;">"~/.emacs.d/customize.el"</span>)
+;; Moved all the custom.el stuff into its own file called
+;; =~/.emacs.d/customize.el=
+(setq custom-file (concat dot-emacs-d-basedir "customize.el"))
 (load custom-file)
 
 (setq hostname
-  (replace-regexp-in-string <span style="font-style: italic;">"\\`[ \t\n]*"</span> <span style="font-style: italic;">""</span>
-    (replace-regexp-in-string <span style="font-style: italic;">"[ \t\n]*\\'"</span> <span style="font-style: italic;">""</span>
-      (shell-command-to-string <span style="font-style: italic;">"hostname"</span>))))
+  (replace-regexp-in-string "\\`[ \t\n]*" ""
+    (replace-regexp-in-string "[ \t\n]*\\'" ""
+      (shell-command-to-string "hostname"))))
 
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org</span>)
+(require 'org)
 
-(setq org-ditaa-jar-path <span style="font-style: italic;">"~/.emacs.d/vendor/org/contrib/scripts/ditaa.jar"</span>)
+(setq org-ditaa-jar-path (concat dot-emacs-d-basedir "vendor/org/contrib/scripts/ditaa.jar"))
 
-(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">org-block-begin-line</span>
-  '((t (<span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#99968b"</span> <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#303030"</span>)))
-  <span style="font-style: italic;">"Face used for line delimiting the begin of source blocks."</span>)
+(defface org-block-begin-line
+  '((t (:foreground "#99968b" :background "#303030")))
+  "Face used for line delimiting the begin of source blocks.")
 
-(<span style="font-weight: bold;">defface</span> <span style="font-weight: bold; font-style: italic;">org-block-end-line</span>
-  '((t (<span style="font-weight: bold;">:foreground</span> <span style="font-style: italic;">"#99968b"</span> <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#303030"</span>)))
-  <span style="font-style: italic;">"Face used for line delimiting the end of source blocks."</span>)
+(defface org-block-end-line
+  '((t (:foreground "#99968b" :background "#303030")))
+  "Face used for line delimiting the end of source blocks.")
 
-(org-babel-load-file <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>)
+(org-babel-load-file (concat dot-emacs-d-basedir "settings.org"))
+</pre>
+</div>
+
+<p>
+Also as you can see in the file above, I am using a dedicated file for
+customized variables. This file has the following content.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (lfe-mode editorconfig company-go go-mode caml alchemist elixir-mode f s helm-idris idris-mode edts erlang helm markdown-mode+ markdown-mode framemove haskell-mode puppet-mode project-explorer company which-key use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 </pre>
 </div>
 
@@ -375,12 +440,12 @@ Small little helpers which make it easier to live-reload the config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">reload-settings</span> ()
+<pre class="src src-emacs-lisp">(defun reload-settings ()
   (interactive)
-  (org-babel-load-file <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>))
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">settings</span> ()
+  (org-babel-load-file "~/.emacs.d/settings.org"))
+(defun settings ()
   (interactive)
-  (find-file <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>))
+  (find-file "~/.emacs.d/settings.org"))
 </pre>
 </div>
 </div>
@@ -391,20 +456,22 @@ Small little helpers which make it easier to live-reload the config:
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (setq package-list '(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">framemove</span> htmlize))
+<pre class="src src-emacs-lisp">  (setq package-list '(use-package framemove htmlize))
 
-<span style="font-style: italic;">;;  </span><span style="font-style: italic;">(unless package-archive-contents</span>
-<span style="font-style: italic;">;;    </span><span style="font-style: italic;">(package-refresh-contents))</span>
+;;  (unless package-archive-contents
+;;    (package-refresh-contents))
 
-  (<span style="font-weight: bold;">dolist</span> (package package-list)
-    (<span style="font-weight: bold;">unless</span> (package-installed-p package)
+  (package-refresh-contents)
+
+  (dolist (package package-list)
+    (unless (package-installed-p package)
       (package-install package)))
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">framemove</span>)
+<pre class="src src-emacs-lisp">(use-package framemove)
 </pre>
 </div>
 </div>
@@ -426,9 +493,9 @@ following your currently entered incomplete command in a pop up.
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'which-key)
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'which-key)
   (package-install 'which-key))
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">which-key</span>)
+(require 'which-key)
 (which-key-mode)
 </pre>
 </div>
@@ -462,16 +529,110 @@ some global stuff here.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(which-key-add-key-based-replacements
-  <span style="font-style: italic;">"C-x C-f"</span> <span style="font-style: italic;">"Open file"</span>
-  <span style="font-style: italic;">"C-x C-s"</span> <span style="font-style: italic;">"Save file"</span>)
+  "C-x C-f" "Open file"
+  "C-x C-s" "Save file")
 </pre>
 </div>
 </div>
 </div>
 </div>
 <div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> project-explorer</h3>
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> helm</h3>
 <div class="outline-text-3" id="text-3-2">
+<p>
+<code>helm</code> is an emacs framework for incremental completions and narrowing
+selections. It helps to rapidly complete file names, buffer names, or
+any other emacs interactions requiring selecting an item from a list
+of possible choices.
+</p>
+</div>
+
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Innstall and load</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'helm)
+  (package-install 'helm))
+(require 'helm-config)
+(require 'helm)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> <span class="todo TODO">TODO</span> Configuration</h4>
+<div class="outline-text-4" id="text-3-2-2">
+</div><ol class="org-ol"><li><a id="sec-3-2-2-1" name="sec-3-2-2-1"></a>Size<br  /><div class="outline-text-5" id="text-3-2-2-1">
+<p>
+Per default the helm-buffer takes quite a large portion of the screen
+estate, therefore we reduce the size and make it resize automatically
+as the amount of matches narrows down.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(helm-autoresize-mode)
+(setq helm-autoresize-max-height 33) ; take 33% of the screen at most
+(setq helm-autoresize-min-height  1) ; get as small as necessary
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> <span class="todo TODO">TODO</span> Keybindings</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "M-x")     'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> company-mode</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+<code>company-mode</code> is a text completion framework for Emacs.
+</p>
+
+<p>
+<a href="http://company-mode.github.io/">http://company-mode.github.io/</a>
+</p>
+</div>
+
+<div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'company)
+  (package-install 'company))
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> <span class="todo TODO">TODO</span> Configuration</h4>
+</div>
+<div id="outline-container-sec-3-3-3" class="outline-4">
+<h4 id="sec-3-3-3"><span class="section-number-4">3.3.3</span> <span class="todo TODO">TODO</span> Key-chords</h4>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> project-explorer</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 <code>project-explorer</code> is a tree explorer.
 </p>
@@ -480,39 +641,62 @@ some global stuff here.
 <a href="https://github.com/sabof/project-explorer">https://github.com/sabof/project-explorer</a>
 </p>
 </div>
-<div id="outline-container-sec-3-2-1" class="outline-4">
-<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Install and load</h4>
-<div class="outline-text-4" id="text-3-2-1">
+<div id="outline-container-sec-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-4-1">
 <p>
 We are only allowed to load <code>project-explorer</code> when in interactive mode.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'project-explorer)
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'project-explorer)
   (package-install 'project-explorer))
-(<span style="font-weight: bold;">unless</span> noninteractive
-  (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">project-explorer</span>))
+(unless noninteractive
+  (require 'project-explorer))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-3-2-2" class="outline-4">
-<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Configuration</h4>
-<div class="outline-text-4" id="text-3-2-2">
+<div id="outline-container-sec-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> Configuration</h4>
+<div class="outline-text-4" id="text-3-4-2">
 <p>
 There is nothing special to configure right now.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-3-2-3" class="outline-4">
-<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> <span class="todo TODO">TODO</span> Key-chords</h4>
+<div id="outline-container-sec-3-4-3" class="outline-4">
+<h4 id="sec-3-4-3"><span class="section-number-4">3.4.3</span> <span class="todo TODO">TODO</span> Key-chords</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<p>
+Toggle the explorer.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c p e") 'project-explorer-toggle)
+</pre>
+</div>
+
+<p>
+Also we do need to update the descriptions in =which-key=s dialog.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(which-key-add-key-based-replacements
+  "C-c p"   "Project-Explorer"
+  "C-c p e" "Toggle PE")
+</pre>
+</div>
+</div>
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Puppet-Mode</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Puppet-Mode</h3>
+<div class="outline-text-3" id="text-3-5">
 <p>
 <code>puppet-mode</code> does provide syntax-highlighting, alignemt and
 navigation for puppet-code.
@@ -523,12 +707,12 @@ navigation for puppet-code.
 </p>
 </div>
 
-<div id="outline-container-sec-3-3-1" class="outline-4">
-<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Install and load</h4>
-<div class="outline-text-4" id="text-3-3-1">
+<div id="outline-container-sec-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-5-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'puppet-mode)
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'puppet-mode)
   (package-install 'puppet-mode))
 </pre>
 </div>
@@ -540,28 +724,187 @@ Also we want to open <code>Puppetfile=s in =ruby-mode</code>.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(add-to-list
- 'auto-mode-alist '(<span style="font-style: italic;">"\\`Puppetfile\\'"</span> . ruby-mode))
+ 'auto-mode-alist '("\\`Puppetfile\\'" . ruby-mode))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-3-3-2" class="outline-4">
-<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Key-Chords</h4>
-<div class="outline-text-4" id="text-3-3-2">
+<div id="outline-container-sec-3-5-2" class="outline-4">
+<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> Configuration</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+We need to alter the <code>puppet-lint-command</code> a bit to have it actually
+work in our projects.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq puppet-lint-command "puppet-lint --no-autoloader_layout-check --with-context --log-format \"%{path}:%{line}: %{kind}: %{message} (%{check})\"")
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3-5-3" class="outline-4">
+<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> Key-Chords</h4>
+<div class="outline-text-4" id="text-3-5-3">
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(which-key-add-major-mode-key-based-replacements 'puppet-mode
-  <span style="font-style: italic;">"C-c C-a"</span> <span style="font-style: italic;">"Align parameters"</span>
-  <span style="font-style: italic;">"C-c C-'"</span> <span style="font-style: italic;">"Toggle quoting"</span>
-  <span style="font-style: italic;">"C-c C-;"</span> <span style="font-style: italic;">"Blank string"</span>
-  <span style="font-style: italic;">"C-c C-j"</span> <span style="font-style: italic;">"Jump to"</span>
-  <span style="font-style: italic;">"C-c C-c"</span> <span style="font-style: italic;">"dry-run"</span>
-  <span style="font-style: italic;">"C-c C-v"</span> <span style="font-style: italic;">"Validate syntax"</span>
-  <span style="font-style: italic;">"C-c C-l"</span> <span style="font-style: italic;">"Check semantic"</span>)
+  "C-c C-a" "Align parameters"
+  "C-c C-'" "Toggle quoting"
+  "C-c C-;" "Blank string"
+  "C-c C-j" "Jump to"
+  "C-c C-c" "dry-run"
+  "C-c C-v" "Validate syntax"
+  "C-c C-l" "Check semantic")
 </pre>
 </div>
 </div>
+</div>
+</div>
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> haskell-mode</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+<code>haskell-mode</code> does provide syntax-highlighting, alignment and
+navigation for haskell source code.
+</p>
+
+<p>
+<a href="http://haskell.github.io/haskell-mode/">http://haskell.github.io/haskell-mode/</a>
+</p>
+</div>
+
+<div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'haskell-mode)
+  (package-install 'haskell-mode))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> lfe-mode</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+<code>lfe-mode</code> is used to highlight and complete <a href="http://lfe.io/">lfe</a>-files. It is
+currently not available at any repository, so it is delivered with
+this settings-file.
+</p>
+</div>
+
+<div id="outline-container-sec-3-7-1" class="outline-4">
+<h4 id="sec-3-7-1"><span class="section-number-4">3.7.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-7-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">; (defvar lfe-mode-dir "~/.emacs.d/vendor/lfe")
+; (add-to-list 'load-path lfe-mode-dir)
+(unless (package-installed-p 'lfe-mode)
+  (package-install 'lfe-mode))
+; (require 'lfe-start)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> alchemist</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+Elixir Tooling Integration Into Emacs.
+</p>
+
+<p>
+<a href="https://github.com/tonini/alchemist.el">https://github.com/tonini/alchemist.el</a>
+</p>
+
+<p>
+<b><b>ATTENTION:</b></b> We do need to make sure, that nothing in this section
+is done, when we do not have <code>emacs</code> 24.4 or later!
+</p>
+</div>
+
+<div id="outline-container-sec-3-8-1" class="outline-4">
+<h4 id="sec-3-8-1"><span class="section-number-4">3.8.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-8-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'alchemist)
+  (package-install 'alchemist))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-8-2" class="outline-4">
+<h4 id="sec-3-8-2"><span class="section-number-4">3.8.2</span> <span class="todo TODO">TODO</span> Configuration</h4>
+</div>
+
+<div id="outline-container-sec-3-8-3" class="outline-4">
+<h4 id="sec-3-8-3"><span class="section-number-4">3.8.3</span> <span class="todo TODO">TODO</span> Keybindings</h4>
+<div class="outline-text-4" id="text-3-8-3">
+<p>
+Currently all keybindings used by <code>alchemist</code> do violate emacs
+keybinding conventions.
+</p>
+
+<p>
+A bug has been reported:
+<a href="https://github.com/tonini/alchemist.el/issues/246">https://github.com/tonini/alchemist.el/issues/246</a>
+</p>
+
+<p>
+And in the meantime it was closed (by me) in favor of the older
+<a href="https://github.com/tonini/alchemist.el/issues/229">https://github.com/tonini/alchemist.el/issues/229</a>.
+</p>
+
+<p>
+Until it got fixed, I won't configure any further key-bindings.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-9" class="outline-3">
+<h3 id="sec-3-9"><span class="section-number-3">3.9</span> go-mode</h3>
+<div class="outline-text-3" id="text-3-9">
+<p>
+This is <code>go-mode</code>, the Emacs mode for editing Go code.
+</p>
+</div>
+
+<div id="outline-container-sec-3-9-1" class="outline-4">
+<h4 id="sec-3-9-1"><span class="section-number-4">3.9.1</span> Install and load</h4>
+<div class="outline-text-4" id="text-3-9-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'go-mode)
+  (package-install 'go-mode))
+
+(unless (package-installed-p 'company-go)
+  (package-install 'company-go))
+
+(require 'company-go) ;; perhaps as an hook for go-mode?
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-9-2" class="outline-4">
+<h4 id="sec-3-9-2"><span class="section-number-4">3.9.2</span> <span class="todo TODO">TODO</span> Configuration</h4>
+</div>
+
+<div id="outline-container-sec-3-9-3" class="outline-4">
+<h4 id="sec-3-9-3"><span class="section-number-4">3.9.3</span> <span class="todo TODO">TODO</span> Keybindings</h4>
 </div>
 </div>
 </div>
@@ -587,8 +930,8 @@ Start the server if not already running.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(load <span style="font-style: italic;">"server"</span>)
-(<span style="font-weight: bold;">unless</span> (server-running-p) (server-start))
+<pre class="src src-emacs-lisp">(load "server")
+(unless (server-running-p) (server-start))
 </pre>
 </div>
 
@@ -600,10 +943,10 @@ client using <code>C-x k</code>, the way it seems natural.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(add-hook 'server-switch-hook
-          (<span style="font-weight: bold;">lambda</span> ()
-            (<span style="font-weight: bold;">when</span> (current-local-map)
+          (lambda ()
+            (when (current-local-map)
               (use-local-map (copy-keymap (current-local-map))))
-            (local-set-key (kbd <span style="font-style: italic;">"C-x k"</span>) 'server-edit)))
+            (local-set-key (kbd "C-x k") 'server-edit)))
 </pre>
 </div>
 </div>
@@ -617,12 +960,12 @@ client using <code>C-x k</code>, the way it seems natural.
 <div class="outline-text-4" id="text-5-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (load-theme 'wheatgrass) <span style="font-style: italic;">;; </span><span style="font-style: italic;">A nice dark theme</span>
-  (set-face-attribute 'default nil <span style="font-weight: bold;">:height</span> 100) <span style="font-style: italic;">;; </span><span style="font-style: italic;">10pt font height</span>
-<span style="font-style: italic;">;;  </span><span style="font-style: italic;">(set-face-attribute 'default nil :family "Consolas")</span>
-  (set-face-attribute 'fringe  nil <span style="font-weight: bold;">:background</span> <span style="font-style: italic;">"#2d2d2d"</span>)
-  (set-face-attribute 'font-lock-comment-face nil <span style="font-weight: bold;">:slant</span> 'italic <span style="font-weight: bold;">:weight</span> 'semibold)
-  <span style="font-style: italic;">;; </span><span style="font-style: italic;">(set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")</span>
+<pre class="src src-emacs-lisp">  (load-theme 'wheatgrass) ;; A nice dark theme
+  (set-face-attribute 'default nil :height 100) ;; 10pt font height
+;;  (set-face-attribute 'default nil :family "Consolas")
+  (set-face-attribute 'fringe  nil :background "#2d2d2d")
+  (set-face-attribute 'font-lock-comment-face nil :slant 'italic :weight 'semibold)
+  ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono for Powerline")
 
   (global-hl-line-mode t)
 </pre>
@@ -634,36 +977,36 @@ We want to use <code>FiraCode</code> if possible by any means.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">when</span> (window-system)
-  (set-default-font <span style="font-style: italic;">"Fira Code"</span>))
-<span style="font-style: italic;">;; </span><span style="font-style: italic;">(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(36 . ".\\(?:&gt;\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(37 . ".\\(?:\\(?:%%\\)\\|%\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(38 . ".\\(?:\\(?:&amp;&amp;\\)\\|&amp;\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/&gt;]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(43 . ".\\(?:\\(?:\\+\\+\\)\\|[+&gt;]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(45 . ".\\(?:\\(?:-[&gt;-]\\|&lt;&lt;\\|&gt;&gt;\\)\\|[&lt;&gt;}~-]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(46 . ".\\(?:\\(?:\\.[.&lt;]\\)\\|[.=-]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=&gt;]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(48 . ".\\(?:x[a-zA-Z]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(58 . ".\\(?:::\\|[:=]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(59 . ".\\(?:;;\\|;\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|-&gt;\\|\\$&gt;\\|\\*&gt;\\|\\+&gt;\\|--\\|&lt;[&lt;=-]\\|=[&lt;=&gt;]\\||&gt;\\)\\|[*$+~/&lt;=&gt;|-]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(61 . ".\\(?:\\(?:/=\\|:=\\|&lt;&lt;\\|=[=&gt;]\\|&gt;&gt;\\)\\|[&lt;=&gt;~]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(62 . ".\\(?:\\(?:=&gt;\\|&gt;[=&gt;-]\\)\\|[=&gt;-]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(91 . ".\\(?:]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(94 . ".\\(?:=\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(119 . ".\\(?:ww\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(123 . ".\\(?:-\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(124 . ".\\(?:\\(?:|[=|]\\)\\|[=&gt;|]\\)")</span>
-<span style="font-style: italic;">;;                </span><span style="font-style: italic;">(126 . ".\\(?:~&gt;\\|~~\\|[&gt;=@~-]\\)"))))</span>
-<span style="font-style: italic;">;;   </span><span style="font-style: italic;">(dolist (char-regexp alist)</span>
-<span style="font-style: italic;">;;     </span><span style="font-style: italic;">(set-char-table-range composition-function-table</span>
-<span style="font-style: italic;">;;                           </span><span style="font-style: italic;">(car char-regexp)</span>
-<span style="font-style: italic;">;;                           </span><span style="font-style: italic;">`([,(cdr char-regexp) 0 font-shape-gstring]))))</span>
+<pre class="src src-emacs-lisp">(when (window-system)
+  (set-default-font "Fira Code"))
+;; (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+;;                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+;;                (36 . ".\\(?:&gt;\\)")
+;;                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+;;                (38 . ".\\(?:\\(?:&amp;&amp;\\)\\|&amp;\\)")
+;;                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/&gt;]\\)")
+;;                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+&gt;]\\)")
+;;                (45 . ".\\(?:\\(?:-[&gt;-]\\|&lt;&lt;\\|&gt;&gt;\\)\\|[&lt;&gt;}~-]\\)")
+;;                (46 . ".\\(?:\\(?:\\.[.&lt;]\\)\\|[.=-]\\)")
+;;                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=&gt;]\\)")
+;;                (48 . ".\\(?:x[a-zA-Z]\\)")
+;;                (58 . ".\\(?:::\\|[:=]\\)")
+;;                (59 . ".\\(?:;;\\|;\\)")
+;;                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|-&gt;\\|\\$&gt;\\|\\*&gt;\\|\\+&gt;\\|--\\|&lt;[&lt;=-]\\|=[&lt;=&gt;]\\||&gt;\\)\\|[*$+~/&lt;=&gt;|-]\\)")
+;;                (61 . ".\\(?:\\(?:/=\\|:=\\|&lt;&lt;\\|=[=&gt;]\\|&gt;&gt;\\)\\|[&lt;=&gt;~]\\)")
+;;                (62 . ".\\(?:\\(?:=&gt;\\|&gt;[=&gt;-]\\)\\|[=&gt;-]\\)")
+;;                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+;;                (91 . ".\\(?:]\\)")
+;;                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+;;                (94 . ".\\(?:=\\)")
+;;                (119 . ".\\(?:ww\\)")
+;;                (123 . ".\\(?:-\\)")
+;;                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=&gt;|]\\)")
+;;                (126 . ".\\(?:~&gt;\\|~~\\|[&gt;=@~-]\\)"))))
+;;   (dolist (char-regexp alist)
+;;     (set-char-table-range composition-function-table
+;;                           (car char-regexp)
+;;                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 </pre>
 </div>
 </div>
@@ -673,13 +1016,13 @@ We want to use <code>FiraCode</code> if possible by any means.
 <h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> UI Elements</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
-Get rid of that ugly disturbing stuff no one needs…
+Get rid of that ugly disturbing stuff no one needsâ€¦
 </p>
 
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(menu-bar-mode -1)
-(<span style="font-weight: bold;">when</span> (display-graphic-p)
+(when (display-graphic-p)
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 </pre>
@@ -735,7 +1078,7 @@ Most of the time I want to have <code>UTF-8</code> as my file encoding.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(set-language-environment <span style="font-style: italic;">"UTF-8"</span>)
+<pre class="src src-emacs-lisp">(set-language-environment "UTF-8")
 </pre>
 </div>
 </div>
@@ -754,12 +1097,12 @@ sourcetree. Instead let's throw them inside <code>~/tmp/</code>.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">backup-dir</span>   (expand-file-name <span style="font-style: italic;">"~/tmp/emacs_backup/"</span>))
-(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">autosave-dir</span> (expand-file-name <span style="font-style: italic;">"~/tmp/emacs_autosave/"</span>))
+<pre class="src src-emacs-lisp">(defvar backup-dir   (expand-file-name "~/tmp/emacs_backup/"))
+(defvar autosave-dir (expand-file-name "~/tmp/emacs_autosave/"))
 
-(setq backup-directory-alist (list (cons <span style="font-style: italic;">".*"</span> backup-dir)))
+(setq backup-directory-alist (list (cons ".*" backup-dir)))
 (setq auto-save-list-file-prefix autosave-dir)
-(setq auto-save-file-name-transforms `((<span style="font-style: italic;">".*"</span> ,autosave-dir t)))
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 (setq tramp-backup-directory-alist backup-directory-alist)
 (setq tramp-auto-save-directory autosave-dir)
 </pre>
@@ -781,15 +1124,15 @@ ugly and needs some care to make it more beautiful.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">json</span>)
+<pre class="src src-emacs-lisp">(require 'json)
 
-(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">find-dropbox-folder</span> ()
+(defun find-dropbox-folder ()
   (interactive)
-  (<span style="font-weight: bold;">let</span> ((json-path (<span style="font-weight: bold;">if</span> (eq system-type 'gnu/linux)
-                       (expand-file-name <span style="font-style: italic;">"~/.dropbox/info.json"</span>)
-                     (concat (getenv <span style="font-style: italic;">"APPDATA"</span>) <span style="font-style: italic;">"\\..\\Local\\Dropbox\\info.json"</span>))))
+  (let ((json-path (if (eq system-type 'gnu/linux)
+                       (expand-file-name "~/.dropbox/info.json")
+                     (concat (getenv "APPDATA") "\\..\\Local\\Dropbox\\info.json"))))
     (cdr (assoc 'path (car (json-read-file json-path))))))
-(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">dropbox-base-path</span> (find-dropbox-folder))
+(defvar dropbox-base-path (find-dropbox-folder))
 </pre>
 </div>
 </div>
@@ -805,16 +1148,15 @@ Use Shift-&lt;Arrow&gt; to navigate through windows.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">unless</span> (package-installed-p 'framemove)
+<pre class="src src-emacs-lisp">(unless (package-installed-p 'framemove)
   (package-install 'framemove))
-(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">framemove</span>)
+(require 'framemove)
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)
 </pre>
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-9" class="outline-2">
 <h2 id="sec-9"><span class="section-number-2">9</span> Debugging</h2>
 <div class="outline-text-2" id="text-9">
@@ -824,17 +1166,17 @@ Setup some keys to make it easier to use GUD.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="font-style: italic;">"&lt;f7&gt;"</span>) 'gud-cont)
-(global-set-key (kbd <span style="font-style: italic;">"&lt;f6&gt;"</span>) 'gud-step)
-(global-set-key (kbd <span style="font-style: italic;">"&lt;f5&gt;"</span>) 'gud-next)
-(global-set-key (kbd <span style="font-style: italic;">"&lt;f8&gt;"</span>) 'gud-finish)
+<pre class="src src-emacs-lisp">(global-set-key (kbd "&lt;f7&gt;") 'gud-cont)
+(global-set-key (kbd "&lt;f6&gt;") 'gud-step)
+(global-set-key (kbd "&lt;f5&gt;") 'gud-next)
+(global-set-key (kbd "&lt;f8&gt;") 'gud-finish)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> Traiiling Whitespace</h2>
+<h2 id="sec-10"><span class="section-number-2">10</span> Whitespace</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 We want to see trailing whitespace, since it is the devil.
@@ -842,8 +1184,10 @@ We want to see trailing whitespace, since it is the devil.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">whitespace</span>)
+<pre class="src src-emacs-lisp">(require 'whitespace)
 (setq-default show-trailing-whitespace t)
+(global-whitespace-mode)
+(setq-default indent-tabs-mode nil)
 </pre>
 </div>
 </div>
@@ -853,7 +1197,7 @@ We want to see trailing whitespace, since it is the devil.
 <div class="outline-text-3" id="text-10-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">no-trailing-whitespace</span> ()
+<pre class="src src-emacs-lisp">(defun no-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
 </pre>
 </div>
@@ -897,7 +1241,7 @@ other buffers location as target when copying in split-screen mode.
 <pre class="src src-emacs-lisp">(setq dired-recursive-copies 'always)
 (setq dired-recursive-deletes 'always)
 (setq dired-dwim-target t)
-(setq dired-listing-switches <span style="font-style: italic;">"-alh"</span>)
+(setq dired-listing-switches "-alh")
 </pre>
 </div>
 </div>
@@ -916,10 +1260,10 @@ other buffers location as target when copying in split-screen mode.
 <div class="outline-text-3" id="text-12-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">use-package</span> <span style="font-weight: bold; text-decoration: underline;">org</span>
-  <span style="font-weight: bold;">:ensure</span> t
-  <span style="font-weight: bold;">:defer</span> t
-  <span style="font-weight: bold;">:pin</span> org)
+<pre class="src src-emacs-lisp">(use-package org
+  :ensure t
+  :defer t
+  :pin org)
 </pre>
 </div>
 </div>
@@ -934,7 +1278,7 @@ Some general settings for org.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">org</span>)
+<pre class="src src-emacs-lisp">(require 'org)
 (setq-default
  org-return-follows-link t
  org-image-actual-width '(400)
@@ -964,7 +1308,7 @@ First we need an empty list
 <div class="outline-text-4" id="text-12-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ob-latex</span>)
+<pre class="src src-emacs-lisp">(require 'ob-latex)
 (add-to-list 'nobbz-babel-languages-alist '(latex . t))
 </pre>
 </div>
@@ -1017,8 +1361,8 @@ First we need an empty list
 <div class="outline-text-4" id="text-12-3-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">nobbz-org-confirm-babel-evaluate</span> (lang body)
-  (not (string= lang <span style="font-style: italic;">"ditaa"</span>))) <span style="font-style: italic;">; </span><span style="font-style: italic;">don't ask for ditaa</span>
+<pre class="src src-emacs-lisp">(defun nobbz-org-confirm-babel-evaluate (lang body)
+  (not (string= lang "ditaa"))) ; don't ask for ditaa
 (setq org-confirm-babel-evaluate 'nobbz-org-confirm-babel-evaluate)
 </pre>
 </div>
@@ -1053,7 +1397,7 @@ There shall be a custom stylesheet for HTML export.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-html</span>)
+<pre class="src src-emacs-lisp">(require 'ox-html)
 (setq org-html-htmlize-output-type 'inline-css)
 </pre>
 </div>
@@ -1069,8 +1413,8 @@ Use minted as a highlighter.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-latex</span>)
-(add-to-list 'org-latex-packages-alist '(<span style="font-style: italic;">""</span> <span style="font-style: italic;">"minted"</span>))
+<pre class="src src-emacs-lisp">(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
 (setq org-latex-listings 'minted)
 </pre>
 </div>
@@ -1083,7 +1427,7 @@ the engine.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(setq org-latex-pdf-process
-      '(<span style="font-style: italic;">"latexmk -xelatex -f -shell-escape %f"</span>))
+      '("latexmk -lualatex -f -shell-escape %f"))
 </pre>
 </div>
 </div>
@@ -1098,9 +1442,25 @@ We want to have this file itself on our agenda.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-default-notes-file (concat dropbox-base-path <span style="font-style: italic;">"/Dokumente/org/TODO.org"</span>))
-(add-to-list 'org-agenda-files (concat dropbox-base-path <span style="font-style: italic;">"/Dokumente/org/TODO.org"</span>))
-(add-to-list 'org-agenda-files <span style="font-style: italic;">"~/.emacs.d/settings.org"</span>)
+<pre class="src src-emacs-lisp">(setq org-default-notes-file (concat dropbox-base-path "/Dokumente/org/TODO.org"))
+(add-to-list 'org-agenda-files (concat dropbox-base-path "/Dokumente/org/TODO.org"))
+(add-to-list 'org-agenda-files "~/.emacs.d/settings.org")
+</pre>
+</div>
+
+<p>
+Also, we do need to have some additional convinience functions which
+help to find the various agenda related files.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun open-todo ()
+  (interactive)
+  (find-file (concat dropbox-base-path "/Dokumente/org/TODO.org")))
+(defun open-timing ()
+  (interactive)
+  (find-file (concat dropbox-base-path "/Dokumente/org/time-sheet.org")))
 </pre>
 </div>
 </div>
@@ -1109,8 +1469,8 @@ We want to have this file itself on our agenda.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Norbert Melzer</p>
-<p class="date">Created: 2016-08-06 Sa 20:16</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="date">Created: 2017-02-25 Sa 10:04</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
