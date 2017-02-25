@@ -8,6 +8,11 @@ PNGS  := $(PNG_FILES:%=_pages/%)
 
 .SECONDARY: $(PDFS) $(HTMLS) $(PNGS)
 
+EXECUTABLES = java latexmk lualatex emacs
+
+EXECUTABLES_CHECK = $(foreach exec,$(EXECUTABLES),\
+	$(if $(shell which $(exec)),,$(error "Executable $(exec) not in PATH")))
+
 pages: $(PDFS) $(HTMLS) $(PNGS)
 	cd _pages; git add $(^:_pages/%=%); git commit -m $(shell date +\"%Y-%M-%dT%T\"); git pull --rebase; git push
 	git push
