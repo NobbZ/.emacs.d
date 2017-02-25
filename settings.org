@@ -21,6 +21,11 @@ executed.
 
 #+INCLUDE: "init.el" src emacs-lisp
 
+Also as you can see in the file above, I am using a dedicated file for
+customized variables. This file has the following content.
+
+#+INCLUDE: "customize.el" src emacs-lisp
+
 The structure of the loading sequence as it is today can be seen in
 figure [[fig:current]], while the planned way to load can be found in
 figure [[fig:planned]].

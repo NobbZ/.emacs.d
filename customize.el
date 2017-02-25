@@ -7,7 +7,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (editorconfig company-go go-mode caml alchemist elixir-mode f s helm-idris idris-mode edts erlang helm markdown-mode+ markdown-mode framemove haskell-mode puppet-mode project-explorer company which-key use-package))))
+    (lfe-mode editorconfig company-go go-mode caml alchemist elixir-mode f s helm-idris idris-mode edts erlang helm markdown-mode+ markdown-mode framemove haskell-mode puppet-mode project-explorer company which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
