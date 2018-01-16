@@ -2,6 +2,12 @@
 #+AUTHOR: Norbert Melzer
 #+EMAIL: timmelzer@gmail.com
 
+#+BEGIN_CENTER
+This repository is discontinued. \\
+I started a new emacs configuration from scratch. \\
+The project has moved to [[https://gitlab.com/NobbZ/emacs.d]]
+#+END_CENTER
+
 This is my work in progress [[http://http://www.gnu.org/software/emacs/][=emacs=]]-config.
 
 You can read [[file:settings.org][=settings.org=]] for further details.
